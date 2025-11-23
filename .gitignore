@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Data files (too large for GitHub)
+data/raw/
+data/processed/*.pkl
+data/processed/*.csv
+*.json
+
+# Outputs that can be regenerated
+outputs/figures/*.png
+outputs/results/*.csv
+
+# Logs
+logs/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep directory structure
+!.gitkeep
+
+# Challenge dataset files (too large for GitHub)
+spotify_million_playlist_dataset_challenge/
+
+# Large data files
+data/raw/challenge_set.json
+data/processed/cooccurrence_matrix.pkl
