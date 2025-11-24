@@ -1,0 +1,11 @@
+Metric,Value
+Total Playlists,10000
+Total Track Instances,281000
+Unique Tracks,66243
+Unique Artists,14040
+Unique Albums,28032
+Min Tracks per Playlist,0
+Max Tracks per Playlist,100
+Mean Tracks per Playlist,28.10
+Median Tracks per Playlist,10.0
+Empty Playlists,1000

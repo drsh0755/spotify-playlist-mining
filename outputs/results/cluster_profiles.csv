@@ -1,0 +1,13 @@
+cluster_id,size,top_terms,top_artists,inferred_genre,sample_names
+0,161,"jams, country jams, car jams, slow jams, car","Drake, Kanye West, Florida Georgia Line, Luke Bryan, Thomas Rhett",country,My Jams | christmas jams! | the jams 
+1,246,"country, texas, classic, favs, girl","Luke Bryan, Florida Georgia Line, Kenny Chesney, Zac Brown Band, Tim McGraw","country, pop",not country | Country Vibes  | Top Country
+2,169,"songs, love songs, favorite songs, favorite, fav songs","Twenty One Pilots, Shawn Mendes, One Direction, Ed Sheeran, Maroon 5",general/mixed,new songs | old songs | Wedding songs 
+3,6074,"summer, throwback, chill, new, christmas",,"chill, throwback",Groovin | uplift | WUBZ
+4,152,"rap, chill, hiphop, mix, new","Drake, Kendrick Lamar, Eminem, Kanye West, J. Cole","hip hop, chill",rap | rap | rap
+5,111,"workout, high, playlist, rap, music","Drake, Kanye West, Eminem, JAY Z, Future","hip hop, workout",My High-Intensity Workout | New Workout | Workout
+6,120,"oldies, oldies goodies, goodies, good, favorite songs","Queen, Billy Joel, The Beatles, Beyoncé, Bruce Springsteen",throwback,Oldies | oldies | oldies
+7,245,"playlist, good, feel good, feel, good vibes","Drake, Coldplay, Ed Sheeran, The Weeknd, Imagine Dragons",chill,spanish playlist | dance playlist | good vibrations
+8,53,"love, electric, country, indie, fall","One Direction, Ed Sheeran, Halsey, Hillsong United, Chris Brown",country,love | Love  | Love
+9,147,"party, party playlist, playlist, grad party, grad","Drake, Kanye West, Migos, Big Sean, Future",party,Party Mix | grad party | Party Bus
+10,204,"music, good music, good, country music, jesus music","Drake, The Weeknd, Eminem, Fall Out Boy, Wiz Khalifa","country, edm",Reception Music | My music | Music
+11,188,"rock, classic rock, classic, metal, alternative","Three Days Grace, Aerosmith, Queen, Led Zeppelin, Guns N' Roses",rock,Rock | Old Rock | Rock 
