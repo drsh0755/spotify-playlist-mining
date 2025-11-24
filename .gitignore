@@ -1,0 +1,47 @@
+**Paste this content:**
+```
+# Large data files - DO NOT PUSH
+data/raw/
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/*.npz
+data/processed/*.pkl
+data/processed/checkpoints/
+
+# Keep only small files
+!data/processed/*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Logs
+logs/*.log
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Backup files
+*.tar.gz
+*.zip
+*.bak
