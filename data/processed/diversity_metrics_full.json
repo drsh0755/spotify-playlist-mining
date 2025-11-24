@@ -1,0 +1,29 @@
+{
+  "artist_diversity_mean": 0.643378118334969,
+  "artist_diversity_median": 0.6701030927835051,
+  "album_diversity_mean": 0.7929687265246611,
+  "album_diversity_median": 0.8461538461538461,
+  "avg_genres_per_playlist": 0.42681,
+  "median_genres_per_playlist": 0.0,
+  "genre_distribution": {
+    "genre_workout": 21275,
+    "genre_party": 31215,
+    "genre_chill": 38350,
+    "genre_rock": 26867,
+    "genre_hip_hop": 26317,
+    "genre_country": 24457,
+    "genre_pop": 10387,
+    "genre_indie": 6510,
+    "genre_classical": 2697,
+    "genre_jazz": 6454,
+    "genre_electronic": 3416,
+    "genre_latin": 5285,
+    "genre_mood": 10175,
+    "genre_tag_count": 213405
+  },
+  "popularity_gini": 0.9212534515246544,
+  "unique_tracks": 2262292,
+  "most_popular_track_count": 46574,
+  "median_track_count": 2,
+  "size_diversity_correlation": -0.3774200863174593
+}

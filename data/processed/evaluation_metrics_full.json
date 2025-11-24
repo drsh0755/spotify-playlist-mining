@@ -1,0 +1,15 @@
+{
+  "r_precision_mean": 0.1333418002592439,
+  "r_precision_median": 0.08333333333333333,
+  "r_precision_std": 0.1494684155698968,
+  "playlists_evaluated": 4998,
+  "ndcg_mean": 1.0,
+  "ndcg_median": 1.0,
+  "total_unique_tracks": 2262292,
+  "total_unique_artists": 295860,
+  "total_unique_albums": 734684,
+  "tracks_in_1_playlist": 1073419,
+  "tracks_in_10plus_playlists": 372433,
+  "tracks_in_100plus_playlists": 70229,
+  "tracks_in_1000plus_playlists": 10333
+}

@@ -1,0 +1,146 @@
+{
+  "by_genre": {
+    "workout": {
+      "num_playlists": 21275,
+      "avg_tracks_per_playlist": 62.066180963572265,
+      "unique_tracks": 155852,
+      "unique_artists": 33499
+    },
+    "party": {
+      "num_playlists": 31215,
+      "avg_tracks_per_playlist": 74.39083773826685,
+      "unique_tracks": 257099,
+      "unique_artists": 58790
+    },
+    "chill": {
+      "num_playlists": 38350,
+      "avg_tracks_per_playlist": 68.9006518904824,
+      "unique_tracks": 346691,
+      "unique_artists": 61738
+    },
+    "rock": {
+      "num_playlists": 26867,
+      "avg_tracks_per_playlist": 81.19231771317973,
+      "unique_tracks": 214655,
+      "unique_artists": 32751
+    },
+    "hip_hop": {
+      "num_playlists": 26317,
+      "avg_tracks_per_playlist": 79.63263289888665,
+      "unique_tracks": 151192,
+      "unique_artists": 27217
+    },
+    "country": {
+      "num_playlists": 24457,
+      "avg_tracks_per_playlist": 87.2474547164411,
+      "unique_tracks": 90649,
+      "unique_artists": 14550
+    },
+    "pop": {
+      "num_playlists": 10387,
+      "avg_tracks_per_playlist": 71.76874939828632,
+      "unique_tracks": 113901,
+      "unique_artists": 24223
+    },
+    "indie": {
+      "num_playlists": 6510,
+      "avg_tracks_per_playlist": 85.52995391705069,
+      "unique_tracks": 93834,
+      "unique_artists": 19729
+    },
+    "classical": {
+      "num_playlists": 2697,
+      "avg_tracks_per_playlist": 56.09454949944383,
+      "unique_tracks": 62655,
+      "unique_artists": 8224
+    },
+    "jazz": {
+      "num_playlists": 6454,
+      "avg_tracks_per_playlist": 62.98868918500155,
+      "unique_tracks": 136126,
+      "unique_artists": 23819
+    },
+    "electronic": {
+      "num_playlists": 3416,
+      "avg_tracks_per_playlist": 68.15310304449649,
+      "unique_tracks": 74446,
+      "unique_artists": 19187
+    },
+    "latin": {
+      "num_playlists": 5285,
+      "avg_tracks_per_playlist": 62.582970671712395,
+      "unique_tracks": 46074,
+      "unique_artists": 9643
+    },
+    "mood": {
+      "num_playlists": 10175,
+      "avg_tracks_per_playlist": 54.321375921375925,
+      "unique_tracks": 113604,
+      "unique_artists": 25668
+    },
+    "tag_count": {
+      "num_playlists": 194517,
+      "avg_tracks_per_playlist": 72.93552234509066,
+      "unique_tracks": 949593,
+      "unique_artists": 140971
+    }
+  },
+  "by_size": {
+    "tiny": {
+      "num_playlists": 46675,
+      "avg_tracks": 7.881328334226031,
+      "avg_artist_diversity": 0.8255469346460241,
+      "unique_tracks": 120297
+    },
+    "small": {
+      "num_playlists": 198977,
+      "avg_tracks": 18.156088392125724,
+      "avg_artist_diversity": 0.7480899360052131,
+      "unique_tracks": 481204
+    },
+    "medium": {
+      "num_playlists": 266794,
+      "avg_tracks": 37.08701095227029,
+      "avg_artist_diversity": 0.6745886970050651,
+      "unique_tracks": 805242
+    },
+    "large": {
+      "num_playlists": 271072,
+      "avg_tracks": 71.8289236807933,
+      "avg_artist_diversity": 0.6059437792304518,
+      "unique_tracks": 1162834
+    },
+    "huge": {
+      "num_playlists": 216482,
+      "avg_tracks": 152.44002272706277,
+      "avg_artist_diversity": 0.516266548773249,
+      "unique_tracks": 1650496
+    }
+  },
+  "by_popularity": {
+    "few_followers": {
+      "num_playlists": 754219,
+      "avg_tracks": 61.18661688448581,
+      "avg_artist_diversity": 0.6467660593558118,
+      "avg_followers": 1.0
+    },
+    "some_followers": {
+      "num_playlists": 239269,
+      "avg_tracks": 81.73989944372234,
+      "avg_artist_diversity": 0.6335968380142345,
+      "avg_followers": 2.773251027086668
+    },
+    "many_followers": {
+      "num_playlists": 5696,
+      "avg_tracks": 100.42661516853933,
+      "avg_artist_diversity": 0.6106337977968148,
+      "avg_followers": 23.448911516853933
+    },
+    "viral": {
+      "num_playlists": 816,
+      "avg_tracks": 83.9031862745098,
+      "avg_artist_diversity": 0.6085978757470945,
+      "avg_followers": 1282.3639705882354
+    }
+  }
+}
