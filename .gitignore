@@ -1,5 +1,8 @@
-**Paste this content:**
-```
+# Raw dataset directory (5GB+) - DO NOT PUSH
+spotify_million_playlist_dataset/
+spotify_million_playlist_dataset_challenge/
+
+
 # Large data files - DO NOT PUSH
 data/raw/
 data/processed/*.csv
