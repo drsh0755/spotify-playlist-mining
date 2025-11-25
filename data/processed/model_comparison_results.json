@@ -1,0 +1,22 @@
+[
+  {
+    "model": "Popularity Baseline",
+    "precision@10": 0.14609053497942387,
+    "test_size": 972
+  },
+  {
+    "model": "Co-occurrence",
+    "precision@10": 0.026123128119800332,
+    "test_size": 601
+  },
+  {
+    "model": "SVD",
+    "precision@10": 0.05005382131324004,
+    "test_size": 929
+  },
+  {
+    "model": "Neural (PCA)",
+    "precision@10": 0.010441334768568353,
+    "test_size": 929
+  }
+]

@@ -1,0 +1,304 @@
+{
+  "playlist_patterns": {
+    "mean_size": 66.346428,
+    "median_size": 49.0,
+    "std_size": 53.669357999148865,
+    "min_size": 5,
+    "max_size": 376,
+    "total_playlists": 1000000
+  },
+  "top_tracks": [
+    {
+      "rank": 1,
+      "track_uri": "spotify:track:7KXjTSCq5nL1LoYtL7XAwS",
+      "total_occurrences": 46574,
+      "num_playlists": 45394,
+      "percentage": 0.07019820268244133
+    },
+    {
+      "rank": 2,
+      "track_uri": "spotify:track:1xznGGDReH1oQq0xzbwXa3",
+      "total_occurrences": 43447,
+      "num_playlists": 41707,
+      "percentage": 0.0654850627376654
+    },
+    {
+      "rank": 3,
+      "track_uri": "spotify:track:7yyRTcZmCiyzzJlNzGC9Ol",
+      "total_occurrences": 41309,
+      "num_playlists": 40659,
+      "percentage": 0.062262583299887674
+    },
+    {
+      "rank": 4,
+      "track_uri": "spotify:track:7BKLCZ1jbUBVqRi2FVlTVw",
+      "total_occurrences": 41079,
+      "num_playlists": 40629,
+      "percentage": 0.06191591806570205
+    },
+    {
+      "rank": 5,
+      "track_uri": "spotify:track:3a1lNhkSLSkpJE4MSHpDu9",
+      "total_occurrences": 39987,
+      "num_playlists": 39577,
+      "percentage": 0.06027001182339462
+    },
+    {
+      "rank": 6,
+      "track_uri": "spotify:track:5hTpBe8h35rJ67eAWHQsJx",
+      "total_occurrences": 35202,
+      "num_playlists": 34765,
+      "percentage": 0.0530578677121849
+    },
+    {
+      "rank": 7,
+      "track_uri": "spotify:track:2EEeOnHehOozLq4aS0n6SL",
+      "total_occurrences": 35138,
+      "num_playlists": 34672,
+      "percentage": 0.05296140434267238
+    },
+    {
+      "rank": 8,
+      "track_uri": "spotify:track:4Km5HrUvYTaSUfiSGPJeQR",
+      "total_occurrences": 34999,
+      "num_playlists": 34157,
+      "percentage": 0.052751897962012365
+    },
+    {
+      "rank": 9,
+      "track_uri": "spotify:track:7GX5flRQZVHRAGd6B4TmDO",
+      "total_occurrences": 34922,
+      "num_playlists": 34048,
+      "percentage": 0.05263584047056761
+    },
+    {
+      "rank": 10,
+      "track_uri": "spotify:track:152lZdxL1OR0ZMW6KquMif",
+      "total_occurrences": 34657,
+      "num_playlists": 33954,
+      "percentage": 0.05223642183117982
+    },
+    {
+      "rank": 11,
+      "track_uri": "spotify:track:0SGkqnVQo9KPytSri1H6cF",
+      "total_occurrences": 33699,
+      "num_playlists": 32930,
+      "percentage": 0.05079248576878924
+    },
+    {
+      "rank": 12,
+      "track_uri": "spotify:track:5dNfHmqgr128gMY2tc5CeJ",
+      "total_occurrences": 32391,
+      "num_playlists": 31509,
+      "percentage": 0.04882101565437705
+    },
+    {
+      "rank": 13,
+      "track_uri": "spotify:track:62vpWI1CHwFy7tMIcSStl8",
+      "total_occurrences": 32336,
+      "num_playlists": 32143,
+      "percentage": 0.04873811744620223
+    },
+    {
+      "rank": 14,
+      "track_uri": "spotify:track:0VgkVdmE4gld66l8iyGjgx",
+      "total_occurrences": 32059,
+      "num_playlists": 31884,
+      "percentage": 0.048320611925030836
+    },
+    {
+      "rank": 15,
+      "track_uri": "spotify:track:0v9Wz8o0BT8DU38R4ddjeH",
+      "total_occurrences": 31492,
+      "num_playlists": 31340,
+      "percentage": 0.04746600676075583
+    },
+    {
+      "rank": 16,
+      "track_uri": "spotify:track:3DXncPQOG4VBw3QHh3S817",
+      "total_occurrences": 31374,
+      "num_playlists": 30800,
+      "percentage": 0.047288152423217114
+    },
+    {
+      "rank": 17,
+      "track_uri": "spotify:track:27GmP9AWRs744SzKcpJsTZ",
+      "total_occurrences": 31119,
+      "num_playlists": 30817,
+      "percentage": 0.04690380618531566
+    },
+    {
+      "rank": 18,
+      "track_uri": "spotify:track:6gBFPUFcJLzWGx4lenP6h2",
+      "total_occurrences": 31106,
+      "num_playlists": 30948,
+      "percentage": 0.046884212063383425
+    },
+    {
+      "rank": 19,
+      "track_uri": "spotify:track:343YBumqHu19cGoGARUTsd",
+      "total_occurrences": 30678,
+      "num_playlists": 29804,
+      "percentage": 0.04623911327976843
+    },
+    {
+      "rank": 20,
+      "track_uri": "spotify:track:5CtI0qwDJkDQGwXD1H1cLb",
+      "total_occurrences": 30485,
+      "num_playlists": 29924,
+      "percentage": 0.045948215931082226
+    }
+  ],
+  "diversity_by_size": {
+    "track_diversity": {
+      "0-10": 0.9954,
+      "11-25": 0.9945,
+      "26-50": 0.9921,
+      "51-100": 0.9889,
+      "101-200": 0.9845,
+      "200+": 0.9799
+    },
+    "artist_diversity": {
+      "0-10": 0.8325,
+      "11-25": 0.7532,
+      "26-50": 0.6775,
+      "51-100": 0.6079,
+      "101-200": 0.5279,
+      "200+": 0.4608
+    },
+    "size": {
+      "0-10": 36008,
+      "11-25": 196613,
+      "26-50": 270928,
+      "51-100": 275502,
+      "101-200": 186054,
+      "200+": 34895
+    }
+  },
+  "top_artists": [
+    {
+      "rank": 1,
+      "artist_uri": "spotify:artist:3TVXtAsR1Inumwj472S9r4",
+      "total_tracks": 846937,
+      "num_playlists": 203345
+    },
+    {
+      "rank": 2,
+      "artist_uri": "spotify:artist:5K4W6rqBFWDnAN6FQUkS6x",
+      "total_tracks": 413297,
+      "num_playlists": 141223
+    },
+    {
+      "rank": 3,
+      "artist_uri": "spotify:artist:2YZyLoL8N0Wb9xBt1NhZWg",
+      "total_tracks": 353624,
+      "num_playlists": 120901
+    },
+    {
+      "rank": 4,
+      "artist_uri": "spotify:artist:5pKCCKE2ajJHZ9KAiaK11H",
+      "total_tracks": 339570,
+      "num_playlists": 150344
+    },
+    {
+      "rank": 5,
+      "artist_uri": "spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ",
+      "total_tracks": 316603,
+      "num_playlists": 125236
+    },
+    {
+      "rank": 6,
+      "artist_uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR",
+      "total_tracks": 294667,
+      "num_playlists": 76657
+    },
+    {
+      "rank": 7,
+      "artist_uri": "spotify:artist:6eUKZXaKkcviH0Ku9w2n3V",
+      "total_tracks": 272116,
+      "num_playlists": 111422
+    },
+    {
+      "rank": 8,
+      "artist_uri": "spotify:artist:1RyvyyTE3xzB2ZywiAwp0i",
+      "total_tracks": 249986,
+      "num_playlists": 96258
+    },
+    {
+      "rank": 9,
+      "artist_uri": "spotify:artist:1uNFoZAHBGtllmzznpCI3s",
+      "total_tracks": 243119,
+      "num_playlists": 92492
+    },
+    {
+      "rank": 10,
+      "artist_uri": "spotify:artist:6l3HvQ5sa6mXTsMTB19rO5",
+      "total_tracks": 241556,
+      "num_playlists": 85749
+    },
+    {
+      "rank": 11,
+      "artist_uri": "spotify:artist:6vWDO969PvNqNYHIOW5v0m",
+      "total_tracks": 230857,
+      "num_playlists": 97468
+    },
+    {
+      "rank": 12,
+      "artist_uri": "spotify:artist:69GGBxA162lTqCwzJG5jLp",
+      "total_tracks": 223509,
+      "num_playlists": 111562
+    },
+    {
+      "rank": 13,
+      "artist_uri": "spotify:artist:7bXgB6jMjp9ATFy66eO08Z",
+      "total_tracks": 212751,
+      "num_playlists": 95501
+    },
+    {
+      "rank": 14,
+      "artist_uri": "spotify:artist:7CajNmpbOovFoOoasH2HaY",
+      "total_tracks": 203047,
+      "num_playlists": 110881
+    },
+    {
+      "rank": 15,
+      "artist_uri": "spotify:artist:3YQKmKGau1PzlVlkL1iodx",
+      "total_tracks": 198905,
+      "num_playlists": 70699
+    },
+    {
+      "rank": 16,
+      "artist_uri": "spotify:artist:4O15NlyKLIASxsJ0PrXPfz",
+      "total_tracks": 197855,
+      "num_playlists": 65549
+    },
+    {
+      "rank": 17,
+      "artist_uri": "spotify:artist:246dkjvS1zLTtiykXe5h60",
+      "total_tracks": 195907,
+      "num_playlists": 93227
+    },
+    {
+      "rank": 18,
+      "artist_uri": "spotify:artist:0c173mlxpT3dSFRgMO8XPh",
+      "total_tracks": 192473,
+      "num_playlists": 97174
+    },
+    {
+      "rank": 19,
+      "artist_uri": "spotify:artist:04gDigrS5kc9YWfZHwBETP",
+      "total_tracks": 187029,
+      "num_playlists": 97256
+    },
+    {
+      "rank": 20,
+      "artist_uri": "spotify:artist:3nFkdlSjzX9mRTtwJOzDYB",
+      "total_tracks": 185520,
+      "num_playlists": 82530
+    }
+  ],
+  "sequential_patterns": {
+    "playlists_with_repetitions": 14621,
+    "percentage": 29.242
+  }
+}

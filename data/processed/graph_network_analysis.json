@@ -1,0 +1,120 @@
+{
+  "structure": {
+    "num_nodes": 10221,
+    "num_edges": 77514899,
+    "density": 0.7420632112505411,
+    "avg_degree": 266203.2621074259,
+    "median_degree": 144297.0,
+    "max_degree": 3563509,
+    "min_degree": 13194
+  },
+  "connectivity": {
+    "avg_edge_weight": 35.101168641140845,
+    "median_edge_weight": 6.0,
+    "max_edge_weight": 45394,
+    "min_edge_weight": 1,
+    "avg_clustering": null
+  },
+  "hub_tracks": [
+    {
+      "rank": 1,
+      "track_uri": "spotify:track:7KXjTSCq5nL1LoYtL7XAwS",
+      "degree": 3563509
+    },
+    {
+      "rank": 2,
+      "track_uri": "spotify:track:1xznGGDReH1oQq0xzbwXa3",
+      "degree": 3472640
+    },
+    {
+      "rank": 3,
+      "track_uri": "spotify:track:7yyRTcZmCiyzzJlNzGC9Ol",
+      "degree": 3339992
+    },
+    {
+      "rank": 4,
+      "track_uri": "spotify:track:3a1lNhkSLSkpJE4MSHpDu9",
+      "degree": 3128377
+    },
+    {
+      "rank": 5,
+      "track_uri": "spotify:track:7BKLCZ1jbUBVqRi2FVlTVw",
+      "degree": 3048401
+    },
+    {
+      "rank": 6,
+      "track_uri": "spotify:track:4Km5HrUvYTaSUfiSGPJeQR",
+      "degree": 2921634
+    },
+    {
+      "rank": 7,
+      "track_uri": "spotify:track:5hTpBe8h35rJ67eAWHQsJx",
+      "degree": 2864453
+    },
+    {
+      "rank": 8,
+      "track_uri": "spotify:track:2EEeOnHehOozLq4aS0n6SL",
+      "degree": 2794729
+    },
+    {
+      "rank": 9,
+      "track_uri": "spotify:track:0SGkqnVQo9KPytSri1H6cF",
+      "degree": 2784654
+    },
+    {
+      "rank": 10,
+      "track_uri": "spotify:track:5dNfHmqgr128gMY2tc5CeJ",
+      "degree": 2744196
+    },
+    {
+      "rank": 11,
+      "track_uri": "spotify:track:62vpWI1CHwFy7tMIcSStl8",
+      "degree": 2730912
+    },
+    {
+      "rank": 12,
+      "track_uri": "spotify:track:5XJJdNPkwmbUwE79gv0NxK",
+      "degree": 2724424
+    },
+    {
+      "rank": 13,
+      "track_uri": "spotify:track:7GX5flRQZVHRAGd6B4TmDO",
+      "degree": 2722619
+    },
+    {
+      "rank": 14,
+      "track_uri": "spotify:track:0v9Wz8o0BT8DU38R4ddjeH",
+      "degree": 2651832
+    },
+    {
+      "rank": 15,
+      "track_uri": "spotify:track:27GmP9AWRs744SzKcpJsTZ",
+      "degree": 2618852
+    },
+    {
+      "rank": 16,
+      "track_uri": "spotify:track:0VgkVdmE4gld66l8iyGjgx",
+      "degree": 2593459
+    },
+    {
+      "rank": 17,
+      "track_uri": "spotify:track:343YBumqHu19cGoGARUTsd",
+      "degree": 2572375
+    },
+    {
+      "rank": 18,
+      "track_uri": "spotify:track:6gBFPUFcJLzWGx4lenP6h2",
+      "degree": 2541545
+    },
+    {
+      "rank": 19,
+      "track_uri": "spotify:track:3DXncPQOG4VBw3QHh3S817",
+      "degree": 2470489
+    },
+    {
+      "rank": 20,
+      "track_uri": "spotify:track:2d8JP84HNLKhmd6IYOoupQ",
+      "degree": 2421312
+    }
+  ]
+}

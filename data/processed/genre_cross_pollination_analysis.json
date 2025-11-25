@@ -1,0 +1,13 @@
+{
+  "genre_distribution": {},
+  "multi_genre_analysis": {
+    "mean_genres_per_playlist": 0.0,
+    "median_genres_per_playlist": 0.0,
+    "max_genres": 0,
+    "multi_genre_playlists": 0,
+    "multi_genre_percentage": 0.0
+  },
+  "top_genre_pairs": [],
+  "genre_exclusivity": {},
+  "correlations": {}
+}

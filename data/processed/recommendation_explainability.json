@@ -1,0 +1,109 @@
+{
+  "sample_explanations": [
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:7DkzLcSXS4KhSvbvIJja3M",
+      "recommended_track": "spotify:track:3b7CDTKB0SRTmQ6ytYi5vZ",
+      "cooccurrence_count": 1131,
+      "seed_total_connections": 185663,
+      "rec_total_connections": 682042,
+      "cooccurrence_strength": 0.006091682241480532,
+      "explanation": "These tracks appeared together in 1,131 playlists. When 'spotify:track:7DkzLcSXS4KhSvbvIJja3M' is in a playlist, there's a 0.61% chance 'spotify:track:3b7CDTKB0SRTmQ6ytYi5vZ' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:3TxpOBmKTHuKD4mNdgkPYt",
+      "recommended_track": "spotify:track:08zJpaUQVi9FrKv2e32Bah",
+      "cooccurrence_count": 577,
+      "seed_total_connections": 185193,
+      "rec_total_connections": 1381031,
+      "cooccurrence_strength": 0.003115668518788507,
+      "explanation": "These tracks appeared together in 577 playlists. When 'spotify:track:3TxpOBmKTHuKD4mNdgkPYt' is in a playlist, there's a 0.31% chance 'spotify:track:08zJpaUQVi9FrKv2e32Bah' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:0LWQWOFoz5GJLqcHk1fRO2",
+      "recommended_track": "spotify:track:2KpCpk6HjXXLb7nnXoXA5O",
+      "cooccurrence_count": 4637,
+      "seed_total_connections": 1402187,
+      "rec_total_connections": 2310066,
+      "cooccurrence_strength": 0.003306976886820374,
+      "explanation": "These tracks appeared together in 4,637 playlists. When 'spotify:track:0LWQWOFoz5GJLqcHk1fRO2' is in a playlist, there's a 0.33% chance 'spotify:track:2KpCpk6HjXXLb7nnXoXA5O' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:01ZepwW5W3Z4fwl4bzaHyY",
+      "recommended_track": "spotify:track:7nDoBWDvf02SyD8kEQuuPO",
+      "cooccurrence_count": 1181,
+      "seed_total_connections": 184126,
+      "rec_total_connections": 596842,
+      "cooccurrence_strength": 0.006414086006321758,
+      "explanation": "These tracks appeared together in 1,181 playlists. When 'spotify:track:01ZepwW5W3Z4fwl4bzaHyY' is in a playlist, there's a 0.64% chance 'spotify:track:7nDoBWDvf02SyD8kEQuuPO' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:7uEcCGtM1FBBGIhPozhJjv",
+      "recommended_track": "spotify:track:3G7tRC24Uh09Hmp1KZ7LQ2",
+      "cooccurrence_count": 648,
+      "seed_total_connections": 102437,
+      "rec_total_connections": 354578,
+      "cooccurrence_strength": 0.006325839296347999,
+      "explanation": "These tracks appeared together in 648 playlists. When 'spotify:track:7uEcCGtM1FBBGIhPozhJjv' is in a playlist, there's a 0.63% chance 'spotify:track:3G7tRC24Uh09Hmp1KZ7LQ2' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:34FWzxRaGdAZyGQz0krlHF",
+      "recommended_track": "spotify:track:4yugZvBYaoREkJKtbG08Qr",
+      "cooccurrence_count": 621,
+      "seed_total_connections": 142962,
+      "rec_total_connections": 825483,
+      "cooccurrence_strength": 0.004343811642254585,
+      "explanation": "These tracks appeared together in 621 playlists. When 'spotify:track:34FWzxRaGdAZyGQz0krlHF' is in a playlist, there's a 0.43% chance 'spotify:track:4yugZvBYaoREkJKtbG08Qr' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:6V9kwssTrwkKT72imgowj9",
+      "recommended_track": "spotify:track:6RUKPb4LETWmmr3iAEQktW",
+      "cooccurrence_count": 1112,
+      "seed_total_connections": 157710,
+      "rec_total_connections": 1539297,
+      "cooccurrence_strength": 0.007050916238665906,
+      "explanation": "These tracks appeared together in 1,112 playlists. When 'spotify:track:6V9kwssTrwkKT72imgowj9' is in a playlist, there's a 0.71% chance 'spotify:track:6RUKPb4LETWmmr3iAEQktW' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:1M1HscO3JywTvswsVx1GcI",
+      "recommended_track": "spotify:track:07KYRDFf8Q6sqj4PWCP9vh",
+      "cooccurrence_count": 1013,
+      "seed_total_connections": 211900,
+      "rec_total_connections": 492237,
+      "cooccurrence_strength": 0.004780556866446437,
+      "explanation": "These tracks appeared together in 1,013 playlists. When 'spotify:track:1M1HscO3JywTvswsVx1GcI' is in a playlist, there's a 0.48% chance 'spotify:track:07KYRDFf8Q6sqj4PWCP9vh' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:3eze1OsZ1rqeXkKStNfTmi",
+      "recommended_track": "spotify:track:0v9Wz8o0BT8DU38R4ddjeH",
+      "cooccurrence_count": 5265,
+      "seed_total_connections": 1082150,
+      "rec_total_connections": 2651832,
+      "cooccurrence_strength": 0.004865314420366862,
+      "explanation": "These tracks appeared together in 5,265 playlists. When 'spotify:track:3eze1OsZ1rqeXkKStNfTmi' is in a playlist, there's a 0.49% chance 'spotify:track:0v9Wz8o0BT8DU38R4ddjeH' is also there."
+    },
+    {
+      "type": "co-occurrence",
+      "seed_track": "spotify:track:0EfsDEYaSjGYd66Pr881nq",
+      "recommended_track": "spotify:track:5E30LdtzQTGqRvNd7l6kG5",
+      "cooccurrence_count": 936,
+      "seed_total_connections": 132593,
+      "rec_total_connections": 195266,
+      "cooccurrence_strength": 0.0070591961868273585,
+      "explanation": "These tracks appeared together in 936 playlists. When 'spotify:track:0EfsDEYaSjGYd66Pr881nq' is in a playlist, there's a 0.71% chance 'spotify:track:5E30LdtzQTGqRvNd7l6kG5' is also there."
+    }
+  ],
+  "recommendation_factors": {
+    "mean_recommendation_entropy": 7.628754339269725,
+    "median_recommendation_entropy": 7.735624261174664,
+    "explanation": "Higher entropy means recommendations are more diverse/spread out. Lower entropy means recommendations are more concentrated on a few tracks."
+  }
+}
