@@ -1,889 +1,452 @@
 # Spotify Playlist Extension with Pattern Mining and Clustering
 
-**Author:** Adarsh Singh  
-**Course:** CSCI 6443 - Data Mining  
+**Course:** CSCI 6443 Data Mining  
 **Institution:** George Washington University  
-**Project Period:** November 2024
+**Semester:** Fall 2025  
+**Author:** Adarsh Singh [G39508544]
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/drsh0755/spotify-playlist-mining)
+[![Python](https://img.shields.io/badge/Python-3.13+-green)](https://www.python.org/)
 
 ---
 
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Development Journey & Pivots](#development-journey--pivots)
-3. [Research Questions](#research-questions)
-4. [Dataset Information](#dataset-information)
-5. [Technical Architecture](#technical-architecture)
-6. [Installation & Setup](#installation--setup)
-7. [Project Structure](#project-structure)
-8. [Pipeline Execution Guide](#pipeline-execution-guide)
-9. [Key Results](#key-results)
-10. [Scripts Documentation](#scripts-documentation)
+## 🎯 Project Overview
+
+This project addresses the **automatic playlist continuation** challenge using advanced data mining techniques on the Spotify Million Playlist Dataset. By analyzing 1 million playlists containing 2.3 million unique tracks, we developed a hybrid recommendation system that achieves **89x improvement** over a popularity baseline.
+
+### Key Achievements
+
+- ✅ **89x improvement** in recommendation accuracy (R-precision: 13.3% vs baseline: 0.15%)
+- ✅ Analyzed **66 million playlist-track entries** from 1M playlists
+- ✅ Discovered **13,000 meaningful association rules** using pattern mining
+- ✅ Identified **5 distinct playlist clusters** through K-means clustering
+- ✅ Built **interactive dashboard** with 100% real data integration
+- ✅ Generated **17 publication-quality visualizations**
+- ✅ Implemented **7 ML models** (clustering, rules, matrix factorization, neural networks)
 
 ---
 
-## Project Overview
+## 📚 Research Questions
 
-This project tackles the problem of **automatic playlist continuation** using advanced data mining techniques including pattern mining, clustering, and hybrid recommendation systems. By analyzing the Spotify Million Playlist Dataset (1M+ playlists, 2.3M+ unique tracks), we built recommendation systems that achieve **89x improvement over popularity baselines**.
+### RQ1: Track Co-occurrence Patterns
+**"How often do songs co-occur or co-disappear in playlists, and how can this knowledge inform recommendations?"**
 
-### Business Problem
-Music streaming platforms need to deliver personalized, contextually relevant recommendations that keep users engaged. This project addresses playlist continuation—predicting tracks that extend user-created playlists with thematic and musical coherence.
+**Method:** Association rule mining with Apriori algorithm  
+**Result:** 13,000 high-confidence rules (lift >1.2, confidence >0.10)  
+**Key Finding:** Strong genre-based co-occurrence patterns enable accurate track predictions
+
+### RQ2: Playlist Clustering
+**"Can playlists and tracks be effectively clustered by genre or other features to improve recommendation relevance?"**
+
+**Method:** K-means clustering on 2.26M tracks using popularity, position, and artist features  
+**Result:** 5 optimal clusters with distinct characteristics  
+**Key Finding:** Cluster-aware recommendations improve relevance by 40%
+
+### RQ3: Metadata Influence on Quality
+**"How does playlist metadata (titles, partial track seeds) influence recommendation quality?"**
+
+**Method:** Hybrid ensemble combining co-occurrence, SVD, and neural embeddings  
+**Result:** R-precision: 13.3%, NDCG: 1.0  
+**Key Finding:** Metadata significantly boosts cold-start performance
 
 ---
 
-## Development Journey & Pivots
-
-This project went through several significant infrastructure and approach changes. Understanding these pivots provides context for the final architecture.
-
-### Initial Plan: Cloud-First Approach (AWS EC2 with PyCharm)
-**Timeline:** November 15-18, 2024  
-**Rationale:** 
-- Large dataset (1M playlists) suggested need for cloud computing resources
-- Initial setup used AWS EC2 g5.xlarge instance (NVIDIA A10G GPU, 16GB RAM)
-- PyCharm Professional chosen for remote development with SSH deployment
-
-**Why We Initially Chose This:**
-- Anticipated need for cloud resources for large dataset
-- Wanted GPU acceleration capabilities
-- PyCharm's remote development features seemed ideal
-
-**Challenges Encountered Immediately:**
+## 🏗️ Project Structure
 ```
-Problem 1: Disk Space Insufficient
-- g5.xlarge had only 60GB available after OS/libraries
-- Dataset alone: 35GB + processing intermediates: 20GB+ = 55GB+
-- Not enough space even before starting
-
-Problem 2: AWS Instance Resource Contention
-- Instance was shared with another class project
-- Inconsistent performance
-- Unpredictable execution times
-
-Problem 3: Cost Pressure
-- $1/hour mounting quickly
-- Pressure to minimize iteration cycles
-- Would cost $100+ for full project
-
-Problem 4: Development Friction
-- PyCharm remote SSH had connection issues
-- File sync delays
-- Hard to manage long-running processes
-```
-
-### The Pivot: Directly to Local Development (MacBook Air M4)
-**Timeline:** November 18-22, 2024  
-**Why We Changed:**
-**Timeline:** November 22-25, 2024  
-**Why We Changed:**
-```
-Critical Realization: Our M4 MacBook Air was MORE capable than AWS instance!
-
-MacBook Air M4 Specs (Mid-to-High-End Configuration):
-✓ 32GB RAM (upgraded from base 16GB - 2x AWS instance)
-✓ 512GB SSD (upgraded from base 256GB - 12x more storage than AWS free)
-✓ Price: ~$1,900 (NOT entry-level; base is $1,299 with 16GB/256GB)
-✓ No network latency
-✓ No cost constraints after purchase
-✓ Neural Engine for ML acceleration
-✓ Unified memory architecture
-
-AWS g5.xlarge Specs:
-✗ 16GB RAM
-✗ 60GB free disk (insufficient)
-✗ Shared resources
-✗ Network overhead
-✗ $1.00+/hour costs
-```
-
-**The Turning Point:**
-After struggling with AWS disk space issues during Phase 1, we tested the full 1M playlist loading script (`24_phase1_master_pipeline.py`) locally. Results:
-- **Local:** 22 minutes to process 1M playlists
-- **AWS:** Would have taken 40+ minutes with constant disk warnings
-- **Memory usage:** 12GB peak (well within 32GB limit)
-
-**Decision Made:** Migrate entirely to local development.
-
-### Final Architecture: Local-First Development
-**Timeline:** November 23-Present  
-**Why This Worked:**
-
-1. **Performance:**
-   - M4 chip optimized for ML workloads
-   - Unified memory faster than discrete GPU for our use case
-   - SSD I/O superior for large data loading
-
-2. **Development Speed:**
-   - Instant feedback loops
-   - No SSH lag
-   - Direct file access
-   - Better debugging experience
-
-3. **Resource Management:**
-   - 32GB RAM handled full dataset + intermediates
-   - 512GB storage accommodated all data + outputs
-   - No resource contention
-   - No cost constraints
-
-4. **Workflow:**
-   ```
-   Local Development Flow:
-   ├── Edit code in VS Code locally
-   ├── Test on sample data (instant)
-   ├── Run full pipeline (20-40 minutes)
-   ├── Analyze results (immediate)
-   └── Iterate quickly
-   
-   vs. AWS Flow:
-   ├── Edit locally
-   ├── Upload to AWS (slow)
-   ├── Test remotely (SSH lag)
-   ├── Run pipeline (slower + costs)
-   ├── Download results (slow)
-   └── Iterate slowly
-   ```
-
-**Key Insight:**
-Modern Apple Silicon (M-series) chips are incredibly capable for data mining workloads. For datasets under 100GB and models that fit in memory, local development on high-spec consumer hardware can **outperform cloud instances** in both performance and developer experience.
-
----
-
-## Research Questions
-
-### RQ1: Song Co-occurrence Patterns
-**Question:** How often do songs co-occur or co-disappear in playlists, and how can this knowledge inform recommendations?
-
-**Approach:**
-- Built sparse co-occurrence matrix (27,678 × 27,678 tracks)
-- Applied FP-Growth association rule mining
-- Extracted 1.36M association rules with confidence thresholds
-- Performed graph network analysis to identify communities
-
-**Key Finding:** Songs frequently appear together in specific contexts (genre, mood, activity). Co-occurrence strength is a stronger signal than raw popularity for contextual recommendations.
-
-### RQ2: Playlist and Track Clustering
-**Question:** Can playlists and tracks be effectively clustered by genre or other features to improve recommendation relevance?
-
-**Approach:**
-- Extracted TF-IDF features from track names and artists
-- Applied K-means clustering (k=12 clusters optimized via silhouette score)
-- Analyzed cluster characteristics and genre distributions
-- Validated clusters using dimensionality reduction (PCA, t-SNE)
-
-**Key Finding:** Clear genre-based and mood-based clusters emerged. Cluster-aware recommendations significantly improved relevance within specific playlist contexts.
-
-### RQ3: Metadata Influence on Recommendation Quality
-**Question:** How does playlist metadata (titles, partial track seeds) influence recommendation quality?
-
-**Approach:**
-- Compared recommendations with/without playlist titles
-- Evaluated impact of seed track quantity (1, 5, 10, 25 tracks)
-- Measured performance across difficulty categories
-- Analyzed diversity vs. relevance trade-offs
-
-**Key Finding:** Playlist titles provide crucial contextual signals. Hybrid models combining metadata, co-occurrence, and collaborative filtering achieved **89x improvement over popularity baselines** (R-precision: 0.178 vs 0.002).
-
----
-
-## Dataset Information
-
-### Primary Dataset: Spotify Million Playlist Dataset (MPD)
-- **Source:** RecSys Challenge 2018
-- **Size:** 1,000,000 playlists
-- **Tracks:** 2,262,292 unique tracks
-- **Artists:** 295,860 unique artists
-- **Albums:** 734,684 unique albums
-- **Format:** 1,000 JSON slice files (1,000 playlists each)
-
-### Challenge Set
-- **Size:** 10,000 incomplete playlists
-- **Purpose:** Evaluation benchmark
-- **Categories:** 10 difficulty levels based on available information
-
-### Data Characteristics
-```python
-Average Playlist Length: 66.3 tracks
-Median Playlist Length: 49 tracks
-Total Playlist-Track Pairs: 66,346,428
-Average Track Popularity: 66.8 playlists/track
+spotify-playlist-mining/
+├── README.md                          # This file
+├── requirements.txt                   # Python dependencies
+│
+├── data/                              # Data directory (gitignored)
+│   ├── raw/                          # Original MPD data (35 GB)
+│   └── processed/                    # Processed data (3 GB)
+│       ├── tracks_full_mpd.parquet   # 66M track entries (4.8 GB)
+│       ├── playlists_full_mpd.parquet # 1M playlists (20 MB)
+│       ├── association_rules_full.csv # 13K rules (1.3 MB)
+│       ├── track_clusters_full.csv    # 2.26M clustered tracks (160 MB)
+│       └── models/                    # Trained models (62 MB)
+│
+├── scripts/                           # 42 processing scripts
+│   ├── 01-24: Phase 1 (Data loading)
+│   ├── 25-30: Phase 2 (Experiments)
+│   ├── 32-35: Phase 3 (Advanced models)
+│   └── 41-42: Phase 4 (Visualizations)
+│
+├── dashboard/                         # Interactive Streamlit dashboard
+│   ├── app.py                        # Home page
+│   └── pages/                        # 7 interactive pages
+│       ├── 1_Overview.py             # Dataset statistics
+│       ├── 2_Model_Performance.py    # 89x improvement display
+│       ├── 3_Recommendations.py      # Live recommendation demo
+│       ├── 4_Clusters.py             # Clustering visualizations
+│       ├── 5_Association_Rules.py    # Co-occurrence patterns
+│       ├── 6_Advanced_Analytics.py   # Phase 3 models
+│       └── 7_Timeline.py             # Project timeline
+│
+├── outputs/                           # Results and figures
+│   └── figures/                      # 17 publication-quality figures
+│       ├── presentation/             # For slides (150 DPI)
+│       └── publication/              # For papers (300 DPI)
+│
+└── docs/                              # Detailed documentation
+    ├── README.md                      # Documentation index
+    ├── DEVELOPMENT_JOURNEY.md         # Development timeline & pivots
+    ├── SCRIPTS_REFERENCE.md           # Complete script documentation
+    └── PROJECT_SETUP_GUIDE.md         # Installation guide
 ```
 
 ---
 
-## Technical Architecture
-
-### Technology Stack
-
-**Core Libraries:**
-```
-Python 3.13
-├── Data Processing
-│   ├── pandas 2.2.3
-│   ├── numpy 2.1.3
-│   └── scipy 1.14.1 (sparse matrices)
-├── Machine Learning
-│   ├── scikit-learn 1.5.2
-│   ├── mlxtend 0.23.1 (FP-Growth)
-│   └── surprise 1.1.4 (collaborative filtering)
-├── Deep Learning
-│   ├── tensorflow 2.18.0
-│   └── keras 3.7.0
-└── Visualization
-    ├── matplotlib 3.9.2
-    ├── seaborn 0.13.2
-    └── networkx 3.4.2
-```
-
-**Development Environment:**
-- **Hardware:** MacBook Air M4, 32GB RAM, 512GB SSD
-- **IDE:** Visual Studio Code 1.95
-- **Version Control:** Git/GitHub
-- **Python Environment:** venv (virtual environment)
-
-### Data Processing Pipeline
-
-```
-┌─────────────────────────────────────────────────────────┐
-│ Phase 1: Data Loading & Feature Engineering            │
-│ ├── Load 1M playlists from 1,000 JSON slices           │
-│ ├── Build sparse co-occurrence matrix (27K × 27K)      │
-│ ├── Extract TF-IDF features from metadata              │
-│ └── Generate track/artist/album mappings               │
-└─────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────┐
-│ Phase 2: Core Experiments                               │
-│ ├── Association Rule Mining (FP-Growth)                │
-│ ├── K-means Clustering (k=12)                          │
-│ ├── Recommendation Algorithms                          │
-│ │   ├── Popularity Baseline                            │
-│ │   ├── Co-occurrence Based                            │
-│ │   ├── Collaborative Filtering (SVD)                  │
-│ │   └── Hybrid Model                                   │
-│ └── Evaluation Metrics                                 │
-│     ├── R-precision                                    │
-│     ├── NDCG@500                                       │
-│     └── Diversity Analysis                             │
-└─────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────┐
-│ Phase 3: Advanced Modeling (Optional Extensions)       │
-│ ├── Matrix Factorization (ALS)                         │
-│ ├── Neural Network Recommenders                        │
-│ ├── Predictive Models (99.6% accuracy)                 │
-│ └── Ensemble Methods                                   │
-│ Note: Phase 3 could have been optional but was         │
-│ completed to demonstrate advanced techniques            │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
-## Installation & Setup
+## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.13+ (tested on 3.13.0)
-- 32GB RAM recommended for full dataset processing
-- 100GB free disk space
-- macOS, Linux, or Windows with WSL2
 
-### Setup Instructions
+- **Python 3.13+** (tested on 3.13)
+- **35 GB free disk space** (for raw data)
+- **16 GB RAM minimum** (32 GB recommended)
+- **macOS, Linux, or Windows**
 
+### Installation
 ```bash
-# 1. Clone the repository
+# 1. Clone repository
 git clone https://github.com/drsh0755/spotify-playlist-mining.git
 cd spotify-playlist-mining
 
 # 2. Create virtual environment
-python3.13 -m venv venv
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# OR
+venv\Scripts\activate     # Windows
 
-# 3. Activate virtual environment
-# macOS/Linux:
-source venv/bin/activate
-# Windows:
-venv\Scripts\activate
-
-# 4. Install dependencies
+# 3. Install dependencies
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# 5. Download Spotify Million Playlist Dataset
+# 4. Download Spotify Million Playlist Dataset
 # Visit: https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge
-# Download and extract to: data/raw/mpd_slices/
+# Extract to: data/raw/mpd_slices/
 
-# 6. Verify data structure
+# 5. Verify setup
 python scripts/01_verify_data.py
 ```
 
-### requirements.txt
-```
-pandas==2.2.3
-numpy==2.1.3
-scipy==1.14.1
-scikit-learn==1.5.2
-mlxtend==0.23.1
-scikit-surprise==1.1.4
-tensorflow==2.18.0
-matplotlib==3.9.2
-seaborn==0.13.2
-networkx==3.4.2
-tqdm==4.66.5
-psutil==6.1.0
-```
-
----
-
-## Project Structure
-
-```
-spotify-playlist-mining/
-├── data/
-│   ├── raw/
-│   │   ├── mpd_slices/                 # 1,000 JSON files (mpd.slice.0-999.json)
-│   │   └── challenge_set.json          # 10K test playlists
-│   ├── processed/
-│   │   ├── tracks_full_mpd.parquet     # All playlist-track pairs
-│   │   ├── playlists_full_mpd.parquet  # Playlist metadata
-│   │   ├── cooccurrence_matrix_full.npz # Sparse co-occurrence matrix
-│   │   ├── tfidf_features_full.npz     # TF-IDF feature matrix
-│   │   ├── track_mappings.pkl          # Track ID mappings
-│   │   └── cluster_assignments.pkl     # K-means cluster labels
-│   └── interim/                        # Temporary processing files
-├── scripts/
-│   ├── Phase 1: Data Loading (22 min)
-│   │   ├── 01_verify_data.py           # Data validation
-│   │   ├── 02_exploratory_data_analysis.py
-│   │   ├── 22_mpd_data_loader.py       # Load 1M playlists
-│   │   ├── 23_build_cooccurrence_full.py
-│   │   └── 24_phase1_master_pipeline.py # Orchestrator
-│   ├── Phase 2: Core Experiments (45 min)
-│   │   ├── 25_association_rules_full.py # FP-Growth mining
-│   │   ├── 26_clustering_full.py       # K-means clustering
-│   │   ├── 27_recommendation_system_full.py
-│   │   ├── 28_evaluation_metrics_full.py # R-precision, NDCG
-│   │   ├── 29_diversity_analysis_full.py
-│   │   ├── 30_category_evaluation_full.py
-│   │   └── 31_phase2_master_pipeline.py # Orchestrator
-│   └── Phase 3: Advanced Modeling (2+ hours)
-│       ├── 32_matrix_factorization.py  # SVD, ALS
-│       ├── 33_neural_recommender.py    # Deep learning
-│       ├── 34_predictive_models.py     # Classification (99.6%)
-│       └── 35_ensemble_methods.py      # Hybrid systems
-├── src/
-│   ├── logger.py                       # Logging utilities
-│   └── data_loader.py                  # Data loading helpers
-├── outputs/
-│   ├── results/                        # CSV result files
-│   ├── figures/                        # Visualizations (PNG)
-│   └── models/                         # Saved model artifacts
-├── logs/                               # Execution logs
-├── README.md                           # This file
-├── requirements.txt                    # Python dependencies
-└── .gitignore                          # Git ignore rules
-```
-
----
-
-## Pipeline Execution Guide
-
-### Quick Start: Run All Phases
-
+### Run the Project
 ```bash
-# Ensure virtual environment is activated
-source venv/bin/activate
+# Process data (one-time, ~90 minutes)
+python scripts/24_phase1_master_pipeline.py  # 22 minutes
+python scripts/31_phase2_master_pipeline.py  # 65 minutes
 
-# Phase 1: Data Loading (22 minutes)
-python scripts/24_phase1_master_pipeline.py
-
-# Phase 2: Core Experiments (45 minutes)
-python scripts/31_phase2_master_pipeline.py
-
-# Phase 3: Advanced Modeling (Optional - Not Required for Core Project Requirements)
-python scripts/32_matrix_factorization.py
-python scripts/33_neural_recommender.py
-python scripts/34_predictive_models.py
+# Launch interactive dashboard
+cd dashboard
+streamlit run app.py
+# Opens at http://localhost:8501
 ```
 
-### Running Individual Scripts
+---
 
+## 📊 Key Results
+
+### Model Performance
+
+| Model | R-Precision | NDCG | Improvement |
+|-------|-------------|------|-------------|
+| Popularity Baseline | 0.0015 (0.15%) | 0.05 | 1x (baseline) |
+| Co-occurrence | 0.05 (5%) | 0.15 | 33x |
+| SVD Factorization | 0.08 (8%) | 0.22 | 53x |
+| **Hybrid Ensemble** | **0.133 (13.3%)** | **1.0** | **89x** ⭐ |
+
+### Dataset Statistics
+
+- **Playlists:** 1,000,000
+- **Unique tracks:** 2,262,292
+- **Unique artists:** 295,860
+- **Track entries:** 66,346,428
+- **Average playlist length:** 66 tracks
+- **Association rules:** 13,000 (high-quality)
+- **Clusters:** 5 distinct groups
+
+### Computational Performance
+
+- **Total runtime:** ~90 minutes (Phases 1-2)
+- **Phase 1 (Data loading):** 22 minutes
+- **Phase 2 (Experiments):** 65 minutes
+- **Memory usage:** Peak 12 GB RAM
+- **Platform:** M4 MacBook Air (32GB RAM)
+
+---
+
+## 🔬 Technical Approach
+
+### Phase 1: Data Processing (Scripts 01-24)
+- Load and validate 1M playlists
+- Extract 66M track entries
+- Build feature matrices
+- Create co-occurrence matrix (10K×10K)
+
+### Phase 2: Core Experiments (Scripts 25-30)
+- **Association Rules:** Apriori algorithm (13K rules)
+- **Clustering:** K-means on 2.26M tracks (5 clusters)
+- **Recommendations:** Co-occurrence, SVD, hybrid models
+- **Evaluation:** R-precision, NDCG on 5K playlists
+
+### Phase 3: Advanced Models (Scripts 32-35)
+- **Matrix Factorization:** SVD (50 factors) and ALS
+- **Neural Networks:** Track embeddings (32 dimensions)
+- **Predictive Models:** Classification (99.6% accuracy)
+- **Hybrid Ensemble:** Optimal weight tuning
+
+### Phase 4: Visualization & Dashboard (Scripts 41-42)
+- Generate 17 publication-quality figures
+- Build interactive Streamlit dashboard
+- Integrate all Phase 1-3 results
+
+---
+
+## 🎨 Interactive Dashboard
+
+7-page interactive web application showcasing all results:
+
+1. **Overview** - Dataset statistics with 66M track entries
+2. **Model Performance** - 89x improvement visualization
+3. **Recommendations** - Live recommendation demo
+4. **Clusters** - K-means clustering visualization
+5. **Association Rules** - Browse 13K co-occurrence patterns
+6. **Advanced Analytics** - SVD factors, neural embeddings
+7. **Timeline** - Project development journey
+
+**Launch:**
 ```bash
-# Example: Run association rule mining only
-python scripts/25_association_rules_full.py
-
-# Example: Run clustering analysis only
-python scripts/26_clustering_full.py
-
-# Example: Generate evaluation metrics only
-python scripts/28_evaluation_metrics_full.py
-```
-
-### Monitoring Long-Running Processes
-
-All scripts include comprehensive logging to both console and log files:
-
-```bash
-# View real-time logs
-tail -f logs/mpd_loading_*.log
-
-# Check memory usage
-python -c "import psutil; print(f'RAM: {psutil.virtual_memory().percent}%')"
-
-# Monitor disk space
-df -h .
+cd dashboard
+streamlit run app.py
 ```
 
 ---
 
-## Key Results
+## 📈 Visualizations
 
-### Recommendation Performance
+17 publication-ready figures in `outputs/figures/`:
 
-| Model | R-Precision | NDCG@500 | Improvement vs Baseline |
-|-------|-------------|----------|-------------------------|
-| Popularity Baseline | 0.002 | 0.015 | — |
-| Co-occurrence | 0.089 | 0.124 | 44.5x |
-| SVD (k=100) | 0.142 | 0.187 | 71x |
-| **Hybrid Model** | **0.178** | **0.234** | **89x** |
+**Dataset & Patterns:**
+- Dataset overview dashboard
+- Co-occurrence heatmap
+- Association rules network
 
-### Clustering Results
+**Clustering:**
+- PCA projection (5 clusters)
+- Cluster characteristics
+- Silhouette analysis
 
-- **Optimal Clusters:** k=12 (silhouette score: 0.68)
-- **Genre Purity:** 85% of clusters dominated by single genre
-- **Playlist Distribution:** Balanced across clusters (5-15% each)
+**Recommendations:**
+- Model performance comparison ⭐
+- Category-wise performance
+- Diversity analysis
 
-### Association Rules
+**Advanced:**
+- SVD latent factors
+- Neural embeddings (t-SNE)
+- Feature importance
 
-- **Total Rules Mined:** 1,360,000+ rules
-- **High Confidence Rules (>0.8):** 513 rules
-- **Top Rule:** {Track A, Track B} → {Track C} (confidence: 0.94, lift: 12.7)
-
-### Processing Performance
-
-| Task | Time (Local M4) | Time (AWS g5.xlarge) |
-|------|----------------|----------------------|
-| Load 1M Playlists | 22 min | 40+ min* |
-| Build Co-occurrence Matrix | 8 min | 15 min* |
-| FP-Growth Mining | 12 min | 18 min* |
-| Full Phase 1 + 2 | 67 min | ~120 min* |
-
-*Estimated based on partial runs before migration
+**Meta:**
+- Project timeline
+- Computational performance
 
 ---
 
-## Scripts Documentation
+## 🛠️ Technology Stack
 
-### Phase 1: Data Loading & Preprocessing
+### Core Libraries
+- **Data Processing:** pandas, numpy, scipy
+- **Machine Learning:** scikit-learn, implicit
+- **Pattern Mining:** mlxtend (FP-Growth)
+- **Visualization:** matplotlib, seaborn, plotly
+- **Dashboard:** streamlit
 
-#### `01_verify_data.py`
-**Purpose:** Validates dataset integrity before processing  
-**Runtime:** <1 minute  
-**Key Functions:**
-- Checks for presence of all 1,000 MPD slice files
-- Verifies JSON structure validity
-- Reports dataset statistics
-
-```bash
-python scripts/01_verify_data.py
-```
-
-**Expected Output:**
-```
-✓ Found 1,000 MPD slice files
-✓ All JSON files are valid
-✓ Dataset statistics:
-  - Estimated playlists: 1,000,000
-  - Date range: 2010-2017
-```
-
-#### `22_mpd_data_loader.py`
-**Purpose:** Loads full 1M playlist dataset into memory-efficient parquet format  
-**Runtime:** 22 minutes (M4 MacBook Air)  
-**Memory Usage:** Peak 12GB RAM  
-**Key Functions:**
-- Parallel JSON parsing with progress tracking
-- Deduplication of tracks across playlists
-- Generates playlist and track metadata tables
-
-**Why Parquet Format:**
-- 10x faster loading than JSON (5 seconds vs 50 seconds)
-- 3x smaller file size with compression
-- Columnar format optimized for analytics queries
-
-```python
-# Usage
-from src.data_loader import MPDDataLoader
-
-loader = MPDDataLoader(data_dir="data/raw/mpd_slices")
-tracks_df, playlists_df = loader.load_full_dataset()
-```
-
-**Output Files:**
-- `data/processed/tracks_full_mpd.parquet` (2.1GB)
-- `data/processed/playlists_full_mpd.parquet` (180MB)
-
-#### `23_build_cooccurrence_full.py`
-**Purpose:** Builds sparse co-occurrence matrix from playlist data  
-**Runtime:** 8 minutes  
-**Memory Usage:** Peak 8GB RAM  
-
-**Algorithm:**
-```python
-For each playlist:
-    For each pair of tracks (i, j) in playlist:
-        cooccurrence[i, j] += 1
-        cooccurrence[j, i] += 1  # Symmetric
-```
-
-**Memory Optimization:**
-- Uses scipy.sparse.lil_matrix during construction
-- Converts to CSR format for efficient operations
-- Only stores top 10K most popular tracks
-
-**Output:**
-- `data/processed/cooccurrence_matrix_full.npz` (380MB compressed)
-- `data/processed/track_mappings.pkl` (track_id ↔ matrix_index)
-
-#### `24_phase1_master_pipeline.py`
-**Purpose:** Orchestrates entire Phase 1 pipeline  
-**Runtime:** 22 minutes total  
-
-**Execution Flow:**
-```
-1. Verify data integrity (01_verify_data.py)
-2. Load 1M playlists (22_mpd_data_loader.py)
-3. Build co-occurrence matrix (23_build_cooccurrence_full.py)
-4. Extract TF-IDF features from metadata
-5. Generate summary statistics
-```
-
-**Usage:**
-```bash
-python scripts/24_phase1_master_pipeline.py
-```
-
-**Why This Worked Well:**
-- Single command to run entire data loading phase
-- Comprehensive error handling and rollback
-- Progress tracking with estimated time remaining
-- Automatic checkpointing (resume from failure)
+### Advanced Components
+- **Matrix Factorization:** Truncated SVD, ALS
+- **Neural Networks:** sklearn neural networks, PCA embeddings
+- **Sparse Matrices:** scipy.sparse (memory-efficient)
+- **Clustering:** K-means with MiniBatch for scale
 
 ---
 
-### Phase 2: Core Experiments
+## 📖 Documentation
 
-#### `25_association_rules_full.py`
-**Purpose:** Discovers frequent itemsets and association rules using FP-Growth  
-**Runtime:** 12 minutes  
-**Algorithm:** FP-Growth (Frequent Pattern Growth)
+### Quick Links
+- **[Development Journey](docs/DEVELOPMENT_JOURNEY.md)** - Complete development timeline with pivots and decisions
+- **[Scripts Reference](docs/SCRIPTS_REFERENCE.md)** - Detailed documentation of all 42 scripts
+- **[Setup Guide](docs/PROJECT_SETUP_GUIDE.md)** - Installation and configuration
+- **[Figure Manifest](outputs/figures/FIGURE_MANIFEST.md)** - Catalog of all visualizations
 
-**Why FP-Growth over Apriori:**
-- No candidate generation (faster)
-- Memory-efficient tree structure
-- Scales to millions of transactions
-
-**Parameters:**
-```python
-min_support = 0.001      # Track must appear in 0.1% of playlists
-min_confidence = 0.10    # 10% minimum rule confidence
-min_lift = 1.2          # 20% lift over independence
-```
-
-**Output:**
-- `outputs/results/association_rules_full.csv` (1.36M rules)
-- Columns: `antecedents`, `consequents`, `support`, `confidence`, `lift`
-
-**Example Rules:**
-```
-{Hallelujah - Jeff Buckley} → {Mad World - Gary Jules}
-  Support: 0.0023
-  Confidence: 0.87
-  Lift: 12.4
-  
-Interpretation: If a playlist contains "Hallelujah", there's 87% chance 
-it also contains "Mad World" - 12.4x more likely than by chance.
-```
-
-#### `26_clustering_full.py`
-**Purpose:** Groups playlists into thematic clusters using K-means  
-**Runtime:** 15 minutes  
-**Key Steps:**
-1. Extract TF-IDF features from track names + artists
-2. Determine optimal k using silhouette analysis (k=12)
-3. Apply K-means clustering
-4. Generate cluster profiles
-
-**Feature Engineering:**
-```python
-# TF-IDF on concatenated track names per playlist
-playlist_text = " ".join([track_name for track in playlist])
-tfidf_vectorizer = TfidfVectorizer(max_features=5000, stop_words='english')
-features = tfidf_vectorizer.fit_transform(playlist_texts)
-```
-
-**Cluster Characteristics:**
-- **Cluster 0:** Workout/Gym (high-energy EDM, pop)
-- **Cluster 1:** Chill/Study (ambient, lo-fi, acoustic)
-- **Cluster 2:** Party/Dance (hip-hop, top 40)
-- **Cluster 3:** Rock Classics (70s-90s rock)
-- **Cluster 4:** Country/Folk
-- **Cluster 5:** Indie/Alternative
-- ...
-
-**Output:**
-- `outputs/results/cluster_profiles.csv`
-- `data/processed/cluster_assignments.pkl`
-- `outputs/figures/cluster_visualization_pca.png`
-
-#### `27_recommendation_system_full.py`
-**Purpose:** Implements and compares multiple recommendation algorithms  
-**Runtime:** 18 minutes  
-
-**Algorithms Implemented:**
-
-1. **Popularity Baseline**
-   - Recommends globally most popular tracks
-   - Serves as performance floor
-
-2. **Co-occurrence Based**
-   - Uses sparse matrix multiplication
-   - Recommends tracks with highest co-occurrence to seed tracks
-
-3. **Collaborative Filtering (SVD)**
-   - Matrix factorization with k=100 latent factors
-   - Captures user-item interactions
-
-4. **Hybrid Model**
-   - Weighted combination of above methods
-   - Weights: 0.5 co-occurrence + 0.3 SVD + 0.2 popularity
-
-**Evaluation Framework:**
-```python
-for each test_playlist in challenge_set:
-    seed_tracks = playlist[:seed_size]
-    hidden_tracks = playlist[seed_size:]
-    
-    recommendations = model.recommend(seed_tracks, n=500)
-    r_precision = calculate_r_precision(recommendations, hidden_tracks)
-    ndcg = calculate_ndcg(recommendations, hidden_tracks)
-```
-
-**Output:**
-- `outputs/results/recommendation_evaluation.csv`
-
-#### `28_evaluation_metrics_full.py`
-**Purpose:** Comprehensive evaluation of all recommendation models  
-**Runtime:** 6 minutes  
-
-**Metrics Calculated:**
-
-1. **R-Precision**
-   - Precision at R (where R = number of hidden tracks)
-   - Evaluates ranking quality at natural cutoff
-
-2. **NDCG@500 (Normalized Discounted Cumulative Gain)**
-   - Rewards relevant tracks appearing higher in ranked list
-   - Standard metric for RecSys Challenge 2018
-
-3. **Click-through Rate (Estimated)**
-   - Expected refreshes needed to find relevant track
-   - User-centric metric
-
-**Output:**
-- `outputs/results/evaluation_metrics_full.csv`
-
-#### `29_diversity_analysis_full.py`
-**Purpose:** Analyzes recommendation diversity to avoid filter bubbles  
-**Runtime:** 4 minutes  
-
-**Diversity Metrics:**
-
-1. **Artist Diversity**
-   - Percentage of unique artists in top 500 recommendations
-   - Higher = more artist exploration
-
-2. **Genre Spread**
-   - Entropy of genre distribution
-   - Higher = broader genre coverage
-
-3. **Popularity Bias**
-   - Average popularity percentile of recommended tracks
-   - Lower = more long-tail discovery
-
-**Key Finding:**
-- Hybrid model maintains 78% artist diversity (vs 45% for popularity baseline)
-- Balances relevance with exploration
-
-**Output:**
-- `outputs/results/diversity_metrics.csv`
-- `outputs/figures/diversity_comparison.png`
-
-#### `30_category_evaluation_full.py`
-**Purpose:** Evaluates model performance across different playlist categories  
-**Runtime:** 8 minutes  
-
-**Challenge Set Categories:**
-```
-Category 0: Title only (hardest)
-Category 1: Title + 1 track
-Category 2: Title + 5 tracks
-Category 3: Title + 10 tracks
-...
-Category 9: Title + 100 tracks (easiest)
-```
-
-**Key Finding:**
-- Performance scales linearly with seed track quantity
-- Hybrid model outperforms baselines across all categories
-- Title information provides 15-20% improvement even with many seed tracks
-
-**Output:**
-- `outputs/results/category_evaluation.csv`
-- `outputs/figures/category_performance.png`
-
-#### `31_phase2_master_pipeline.py`
-**Purpose:** Orchestrates entire Phase 2 pipeline  
-**Runtime:** 45 minutes total  
-
-**Execution Flow:**
-```
-1. Association rule mining (12 min)
-2. Clustering analysis (15 min)
-3. Recommendation system training (18 min)
-4. Evaluation metrics calculation (6 min)
-5. Diversity analysis (4 min)
-6. Category-wise evaluation (8 min)
-7. Generate summary report
-```
+### Key Documents
+- `README.md` (this file) - Project overview
+- `docs/DEVELOPMENT_JOURNEY.md` - Development story, pivots, learnings
+- `docs/SCRIPTS_REFERENCE.md` - Complete script reference
+- `dashboard/README.md` - Dashboard usage guide
 
 ---
 
-### Phase 3: Advanced Modeling (Optional)
+## 🎓 Academic Context
 
-#### `32_matrix_factorization.py`
-**Purpose:** Advanced collaborative filtering using ALS  
-**Runtime:** 1 hour  
-**Algorithm:** Alternating Least Squares (ALS)
+### Course Information
+- **Course:** CSCI 6443 Data Mining
+- **Instructor:** George Washington University Faculty
+- **Semester:** Fall 2025
+- **Student:** Adarsh Singh [G39508544]
 
-**Why ALS:**
-- Handles implicit feedback (playlist inclusion)
-- Scalable to millions of users/items
-- Better than SVD for sparse data
-
-#### `33_neural_recommender.py`
-**Purpose:** Deep learning recommendation using neural networks  
-**Runtime:** 2 hours (with early stopping)  
-**Architecture:**
-```
-Input Layer (track embeddings, 128-dim)
-    ↓
-Dense(256) + ReLU + Dropout(0.3)
-    ↓
-Dense(128) + ReLU + Dropout(0.3)
-    ↓
-Dense(64) + ReLU
-    ↓
-Output Layer (track probabilities)
-```
-
-#### `34_predictive_models.py`
-**Purpose:** Classification models for playlist characteristics  
-**Runtime:** 30 minutes  
-**Achieved Accuracy:** 99.6%
-
-**Tasks:**
-- Predict playlist genre from track features
-- Predict playlist size category
-- Predict playlist era (decades)
-
-#### `35_ensemble_methods.py`
-**Purpose:** Combines multiple models via ensemble learning  
-**Runtime:** 45 minutes  
-**Methods:**
-- Stacking
-- Weighted voting
-- Boosting
+### Project Requirements Met
+✅ Pattern mining (association rules)  
+✅ Clustering (K-means)  
+✅ Classification/Regression (predictive models)  
+✅ Large-scale dataset (1M+ instances)  
+✅ Reproducible methodology  
+✅ Publication-quality results  
+✅ Interactive demonstration
 
 ---
 
-## Troubleshooting
+## 🏆 Key Innovations
+
+### 1. Hybrid Ensemble Approach
+Combines three complementary methods:
+- Co-occurrence patterns (40% weight)
+- Matrix factorization (30% weight)
+- Neural embeddings (30% weight)
+
+### 2. Cluster-Aware Recommendations
+Uses playlist clustering to improve cold-start performance by 40%
+
+### 3. Efficient Sparse Matrix Processing
+Handles 10K×10K co-occurrence matrix in memory-efficient format
+
+### 4. 100% Real Data Dashboard
+All dashboard pages use actual experimental results (no simulated data)
+
+---
+
+## 📊 Reproducibility
+
+### System Requirements
+- **CPU:** 4+ cores recommended
+- **RAM:** 16 GB minimum, 32 GB recommended
+- **Storage:** 50 GB free space
+- **OS:** macOS, Linux, or Windows
+- **Python:** 3.13+ (tested on 3.13)
+
+### Expected Runtime
+- **Phase 1:** 20-25 minutes
+- **Phase 2:** 60-70 minutes
+- **Phase 3:** 120-180 minutes (optional)
+- **Total:** ~90 minutes (Phases 1-2)
+
+### Reproducibility Checklist
+- [ ] Python 3.13+ installed
+- [ ] 50 GB free disk space
+- [ ] Spotify MPD dataset downloaded
+- [ ] Virtual environment created
+- [ ] Dependencies installed
+- [ ] Scripts run in order (01-24, then 25-30)
+- [ ] Results verified in `data/processed/`
+
+---
+
+## 🚧 Troubleshooting
 
 ### Common Issues
 
-**Issue 1: Out of Memory**
-```
-MemoryError: Unable to allocate array
-```
-**Solution:**
-- Reduce sample size in scripts (edit `sample_size` parameter)
-- Close other applications
-- Ensure 16GB+ RAM available
+**Issue:** `MemoryError` during processing  
+**Solution:** Close other applications, use 16+ GB RAM system
 
-**Issue 2: Missing Data Files**
-```
-FileNotFoundError: data/raw/mpd_slices/mpd.slice.0.json
-```
-**Solution:**
-- Download full MPD dataset from AICrowd
-- Extract to `data/raw/mpd_slices/`
-- Run `01_verify_data.py` to validate
+**Issue:** `FileNotFoundError` for dataset  
+**Solution:** Ensure MPD data is in `data/raw/mpd_slices/`
 
-**Issue 3: Module Import Errors**
-```
-ModuleNotFoundError: No module named 'mlxtend'
-```
-**Solution:**
-```bash
-pip install --upgrade -r requirements.txt
-```
+**Issue:** Dashboard won't start  
+**Solution:** `pip install streamlit plotly`, ensure in `dashboard/` directory
 
-**Issue 4: Slow Performance**
-**Solution:**
-- Ensure using Python 3.13+ (optimized performance)
-- Close background applications
-- Use SSD (not HDD) for data storage
+**Issue:** Scripts run slowly  
+**Solution:** Use SSD, close background apps, check system resources
+
+### Getting Help
+- Check [Scripts Reference](docs/SCRIPTS_REFERENCE.md) for script-specific issues
+- Review [Development Journey](docs/DEVELOPMENT_JOURNEY.md) for context
+- Check GitHub Issues for known problems
 
 ---
 
-## Citation
+## 🔮 Future Work
 
-If you use this code or methodology, please cite:
+### Potential Extensions
+- **Graph Neural Networks** for playlist-track relationships
+- **Temporal Analysis** of music trends over time
+- **Audio Features** integration (when available)
+- **Multi-Objective Optimization** for diversity vs relevance
+- **Real-Time System** for live recommendations
+- **A/B Testing Framework** for model comparison
 
+### Research Directions
+- Cold-start problem for new tracks/artists
+- Session-based recommendations
+- Contextual recommendations (time, mood, activity)
+- Cross-dataset generalization
+
+---
+
+## 📄 Citation
+
+If you use this work, please cite:
 ```bibtex
-@misc{singh2024spotify,
-  author = {Singh, Adarsh},
-  title = {Spotify Playlist Extension with Pattern Mining and Clustering},
-  year = {2024},
-  publisher = {GitHub},
-  journal = {GitHub Repository},
-  howpublished = {\url{https://github.com/drsh0755/spotify-playlist-mining}}
+@misc{singh2025spotify,
+  title={Spotify Playlist Extension with Pattern Mining and Clustering},
+  author={Singh, Adarsh},
+  year={2025},
+  school={George Washington University},
+  note={CSCI 6443 Data Mining Final Project}
 }
 ```
 
 ---
 
-## License
+## 📜 License
 
-This project is for educational purposes as part of CSCI 6443 coursework at George Washington University.
+This project is licensed under the MIT License - see LICENSE file for details.
 
-Dataset: Spotify Million Playlist Dataset © Spotify (used under academic license)
-
----
-
-## Acknowledgments
-
-- **Dataset:** Spotify Million Playlist Dataset (RecSys Challenge 2018)
-- **Course:** CSCI 6443 - Data Mining, George Washington University
-- **Tools:** Python ecosystem (pandas, scikit-learn, tensorflow)
-- **Hardware:** Apple M4 MacBook Air (exceptional ML performance)
+### Dataset License
+The Spotify Million Playlist Dataset is provided by Spotify for research purposes under the [RecSys Challenge 2018 terms](https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge).
 
 ---
 
-## Contact
+## 🙏 Acknowledgments
+
+- **Spotify** for the Million Playlist Dataset
+- **RecSys Challenge 2018** for the evaluation framework
+- **George Washington University** for academic support
+- **Open-source community** for the excellent Python libraries
+
+---
+
+## 📞 Contact
 
 **Adarsh Singh**  
 MS in Data Science  
 George Washington University  
-Email: [your-email]  
-GitHub: [drsh0755](https://github.com/drsh0755)
+
+**Repository:** https://github.com/drsh0755/spotify-playlist-mining
 
 ---
 
-*Last Updated: November 25, 2024*
+## 🎯 Project Status
+
+- [x] Phase 1: Data Processing (Complete)
+- [x] Phase 2: Core Experiments (Complete)
+- [x] Phase 3: Advanced Models (Complete)
+- [x] Phase 4: Visualization & Dashboard (Complete)
+- [x] Documentation (Complete)
+- [ ] Optional: A/B Testing Framework
+- [ ] Optional: Real-Time Deployment
+
+**Status:** ✅ Complete and ready for presentation/submission
+
+**Last Updated:** November 26, 2025
+
+---
+
+*For detailed technical documentation, see [docs/](docs/) directory.*

@@ -1273,4 +1273,335 @@ Fix: Reduce batch size in script or upgrade RAM
 
 ---
 
+## Phase 4: Visualization & Presentation (Scripts 41-42)
+
+### Script 41: Create All Visualizations Complete
+
+**File:** `scripts/41_create_all_visualizations_complete.py`
+
+**Purpose:** Generate all 17 publication-quality figures for paper, presentation, and portfolio.
+
+**What it does:**
+- Creates comprehensive visualization suite
+- Generates figures in two formats (300 DPI publication, 150 DPI presentation)
+- Covers all research questions and phases
+- Creates figure manifest automatically
+
+**Usage:**
+```bash
+python scripts/41_create_all_visualizations_complete.py
+```
+
+**Input files:**
+- `data/processed/tracks_full_mpd.parquet` (4.8 GB)
+- `data/processed/playlists_full_mpd.parquet` (20 MB)
+- `data/processed/association_rules_full.csv` (1.3 MB)
+- `data/processed/track_clusters_full.csv` (160 MB)
+- `data/processed/cluster_profiles_full.csv` (800 B)
+- `data/processed/models/*.pkl` (Phase 3 models)
+- `data/processed/evaluation_metrics_full.json` (460 B)
+
+**Output:**
+```
+outputs/figures/
+├── publication/              # High-res (300 DPI) for papers
+│   ├── 01_dataset_overview.png
+│   ├── 02_cooccurrence_heatmap.png
+│   ├── ... (15 more figures)
+│   └── 17_computational_performance.png
+├── presentation/             # Medium-res (150 DPI) for slides
+│   └── ... (same 17 figures)
+└── FIGURE_MANIFEST.md       # Catalog of all figures
+```
+
+**Figures Generated:**
+
+**Category 1: Dataset & Patterns (4 figures)**
+1. Dataset overview dashboard (4-panel: length dist, popularity, top artists, stats)
+2. Co-occurrence heatmap (50×50 most popular tracks)
+3. Association rules network (graph with confidence-weighted edges)
+4. Association metrics (support vs confidence, lift distribution, top 10 rules)
+
+**Category 2: Clustering (3 figures)**
+5. Cluster visualization (PCA projection, 5 clusters, 10K sample)
+6. Cluster characteristics (5 radar charts showing cluster profiles)
+7. Silhouette analysis (elbow curve + silhouette scores k=5 to k=30)
+
+**Category 3: Recommendations (4 figures)**
+8. Model performance comparison (bar chart: 4 models, R-precision + NDCG)
+9. Category performance (line plot: performance across difficulty categories)
+10. Diversity analysis (artist diversity + popularity distributions)
+11. Recommendation example (seed tracks → top 10 recs with reasoning)
+
+**Category 4: Advanced Models (4 figures)**
+12. SVD latent factors (heatmap showing interpretable patterns)
+13. Neural embeddings (t-SNE visualization of 32-dim embeddings)
+14. Predictive models (confusion matrix + regression scatter)
+15. Feature importance (horizontal bars for classification + regression)
+
+**Category 5: Meta (2 figures)**
+16. Project timeline (Gantt-style with phases and pivot)
+17. Computational performance (runtime + memory usage bars)
+
+**Algorithm:**
+```python
+class VisualizationSuite:
+    def __init__(self, output_dir):
+        self.pub_dir = output_dir / "publication"  # 300 DPI
+        self.pres_dir = output_dir / "presentation"  # 150 DPI
+        
+    def generate_all(self):
+        # Load data once
+        self.load_all_data()
+        
+        # Generate each figure
+        for i, figure_func in enumerate(self.figure_functions, 1):
+            try:
+                fig = figure_func()
+                self.save_figure(fig, f"{i:02d}_{figure_name}")
+                self.manifest[i] = "Success"
+            except Exception as e:
+                self.manifest[i] = f"Failed: {e}"
+        
+        # Create manifest
+        self.create_manifest()
+```
+
+**Styling:**
+- Colorblind-friendly palette throughout
+- Consistent fonts (Arial/Helvetica, 12pt)
+- Professional layout and spacing
+- Annotations on key insights
+- Figure sizes: 8×6 (single), 12×6 (double), 12×10 (quad)
+
+**Runtime:** ~8 minutes for all 17 figures on M4 MacBook
+
+**Memory:** Peak 4 GB (when loading large matrices)
+
+**Common issues:**
+- **Missing data files:** Run Phases 1-3 first
+- **Memory errors:** Close other apps, reduce sample sizes
+- **Import errors:** `pip install matplotlib seaborn networkx scipy`
+
+**Notes:**
+- Generates placeholder data if real data missing
+- All figures use consistent color scheme
+- Both DPI formats useful (paper vs slides)
+- Manifest tracks success/failure of each figure
+
+---
+
+### Script 42: Create Figure 1 Standalone
+
+**File:** `scripts/42_create_figure1_standalone.py`
+
+**Purpose:** Generate individual Figure 1 (Dataset Overview) for quick regeneration or customization.
+
+**What it does:**
+- Creates dataset overview dashboard only
+- Useful for quick updates or testing
+- Same quality as Script 41 but faster
+
+**Usage:**
+```bash
+python scripts/42_create_figure1_standalone.py
+```
+
+**Input files:**
+- `data/processed/tracks_full_mpd.parquet`
+- `data/processed/playlists_full_mpd.parquet`
+
+**Output:**
+```
+outputs/figures/
+├── publication/01_dataset_overview.png
+└── presentation/01_dataset_overview.png
+```
+
+**Figure components (4 panels):**
+1. **Top-left:** Playlist length distribution
+   - Histogram with mean/median lines
+   - Log scale for better visibility
+   
+2. **Top-right:** Track popularity distribution
+   - Power law distribution
+   - Shows long tail of rare tracks
+   
+3. **Bottom-left:** Top 20 artists by track count
+   - Horizontal bar chart
+   - Drake, Kanye, Kendrick at top
+   
+4. **Bottom-right:** Summary statistics table
+   - Total playlists, tracks, artists
+   - Average metrics
+   - Key dataset characteristics
+
+**Algorithm:**
+```python
+def create_dataset_overview():
+    # Load data
+    tracks = pd.read_parquet("data/processed/tracks_full_mpd.parquet")
+    playlists = pd.read_parquet("data/processed/playlists_full_mpd.parquet")
+    
+    # Create 2x2 subplot grid
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    
+    # Panel 1: Playlist lengths
+    axes[0,0].hist(playlist_lengths, bins=50, ...)
+    
+    # Panel 2: Track popularity
+    axes[0,1].hist(track_counts, bins=100, log=True, ...)
+    
+    # Panel 3: Top artists
+    axes[1,0].barh(top_artists.index, top_artists.values, ...)
+    
+    # Panel 4: Statistics table
+    axes[1,1].table(cellText=stats_data, ...)
+    
+    return fig
+```
+
+**Customization:**
+- Easy to modify bin sizes, colors, labels
+- Can change number of top artists shown
+- Adjustable statistics in table
+- Flexible figure size and DPI
+
+**Runtime:** <10 seconds
+
+**Memory:** <1 GB
+
+**Use cases:**
+- Quick overview for presentations
+- Testing visualization changes
+- Creating custom variants
+- Standalone dataset description
+
+**Notes:**
+- Generates same figure as Script 41's Figure 1
+- Useful template for creating other standalone figures
+- Easier to customize than running full suite
+
+---
+
+## Script Execution Summary
+
+### Complete Pipeline (All Phases)
+
+**Option 1: Run Everything**
+```bash
+# Phase 1: Data processing (22 min)
+python scripts/24_phase1_master_pipeline.py
+
+# Phase 2: Experiments (65 min)
+python scripts/31_phase2_master_pipeline.py
+
+# Phase 3: Advanced models (120 min) - Optional
+python scripts/32_matrix_factorization_models.py
+python scripts/33_neural_network_recommender.py
+python scripts/34_predictive_models.py
+python scripts/35_hybrid_ensemble_system.py
+
+# Phase 4: Visualizations (8 min)
+python scripts/41_create_all_visualizations_complete.py
+```
+
+**Option 2: Core Project Only (Phases 1-2)**
+```bash
+python scripts/24_phase1_master_pipeline.py  # 22 min
+python scripts/31_phase2_master_pipeline.py  # 65 min
+python scripts/41_create_all_visualizations_complete.py  # 8 min
+# Total: ~95 minutes
+```
+
+**Option 3: Quick Figure Only**
+```bash
+python scripts/42_create_figure1_standalone.py  # <10 sec
+```
+
+---
+
+## Script Statistics
+
+### Complete Project Coverage
+
+| Phase | Scripts | Total Lines | Runtime | Memory |
+|-------|---------|-------------|---------|--------|
+| 0: Setup | 01-02 | ~500 | <1 min | <1 GB |
+| 1: Data | 22-24 | ~2,000 | 22 min | 12 GB |
+| 2: Experiments | 25-31 | ~3,500 | 65 min | 8 GB |
+| 3: Advanced | 32-35 | ~2,500 | 120 min | 10 GB |
+| 4: Visualization | 41-42 | ~1,500 | 8 min | 4 GB |
+| **Total** | **42** | **~10,000** | **~210 min** | **12 GB peak** |
+
+### Script Categories
+
+- **Data Loading:** 6 scripts (01-02, 22-24, plus helpers)
+- **Pattern Mining:** 1 script (25)
+- **Clustering:** 1 script (26)
+- **Recommendations:** 5 scripts (27-31)
+- **Advanced Models:** 4 scripts (32-35)
+- **Visualization:** 2 scripts (41-42)
+- **Utilities:** Multiple helper scripts
+
+---
+
+## Troubleshooting Guide
+
+### Common Issues Across All Scripts
+
+**Issue:** `FileNotFoundError`
+- **Cause:** Script run from wrong directory
+- **Solution:** Always run from project root
+- **Verify:** `pwd` should show project root
+
+**Issue:** `MemoryError`
+- **Cause:** Insufficient RAM
+- **Solution:** Close other apps, use 16+ GB system
+- **Alternative:** Reduce sample sizes in scripts
+
+**Issue:** `ModuleNotFoundError`
+- **Cause:** Missing dependencies
+- **Solution:** `pip install -r requirements.txt`
+- **Verify:** `pip list | grep [package]`
+
+**Issue:** Scripts take too long
+- **Cause:** CPU bottleneck or disk I/O
+- **Solution:** Use SSD, close background apps
+- **Monitor:** `htop` or Activity Monitor
+
+**Issue:** Results don't match documentation
+- **Cause:** Different random seed or data subset
+- **Solution:** Check script parameters match documented values
+- **Note:** Exact numbers may vary slightly due to randomness
+
+---
+
+## Best Practices for Running Scripts
+
+### Preparation
+1. ✅ Verify data files exist
+2. ✅ Check disk space (50+ GB free)
+3. ✅ Close unnecessary apps
+4. ✅ Run from project root
+5. ✅ Activate virtual environment
+
+### During Execution
+1. ✅ Monitor logs for errors
+2. ✅ Check memory usage
+3. ✅ Don't interrupt long-running scripts
+4. ✅ Use `nohup` for overnight runs
+5. ✅ Verify outputs after completion
+
+### After Completion
+1. ✅ Check output files exist
+2. ✅ Verify file sizes reasonable
+3. ✅ Spot-check results
+4. ✅ Save logs for reference
+5. ✅ Document any issues
+
+---
+
+*This completes the documentation for all 42 scripts in the Spotify Playlist Extension project.*
+
 *For detailed development journey and architectural decisions, see DEVELOPMENT_JOURNEY.md*
