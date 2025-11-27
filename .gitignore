@@ -48,3 +48,7 @@ Thumbs.db
 *.tar.gz
 *.zip
 *.bak
+
+# Model files (large)
+data/processed/models/
+nohup.out
