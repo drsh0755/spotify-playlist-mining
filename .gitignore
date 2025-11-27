@@ -52,3 +52,7 @@ Thumbs.db
 # Model files (large)
 data/processed/models/
 nohup.out
+
+# Model files (large)
+data/processed/models/
+nohup.out
