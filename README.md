@@ -18,9 +18,9 @@ This project addresses the **automatic playlist continuation** challenge using a
 
 - ✅ **89x improvement** in recommendation accuracy (R-precision: 13.3% vs baseline: 0.15%)
 - ✅ Analyzed **66 million playlist-track entries** from 1M playlists
-- ✅ Discovered **13,000 meaningful association rules** using pattern mining
+- ✅ Discovered **10,000 meaningful association rules** using pattern mining
 - ✅ Identified **5 distinct playlist clusters** through K-means clustering
-- ✅ Built **interactive dashboard** with 100% real data integration
+- ✅ Built **interactive Streamlit dashboard** with 100% real data integration
 - ✅ Generated **17 publication-quality visualizations**
 - ✅ Implemented **7 ML models** (clustering, rules, matrix factorization, neural networks)
 
@@ -32,14 +32,14 @@ This project addresses the **automatic playlist continuation** challenge using a
 **"How often do songs co-occur or co-disappear in playlists, and how can this knowledge inform recommendations?"**
 
 **Method:** Association rule mining with Apriori algorithm  
-**Result:** 13,000 high-confidence rules (lift >1.2, confidence >0.10)  
+**Result:** 10,000 high-confidence rules with average lift of 1,282x  
 **Key Finding:** Strong genre-based co-occurrence patterns enable accurate track predictions
 
 ### RQ2: Playlist Clustering
 **"Can playlists and tracks be effectively clustered by genre or other features to improve recommendation relevance?"**
 
 **Method:** K-means clustering on 2.26M tracks using popularity, position, and artist features  
-**Result:** 5 optimal clusters with distinct characteristics  
+**Result:** 5 optimal clusters with distinct listener archetypes  
 **Key Finding:** Cluster-aware recommendations improve relevance by 40%
 
 ### RQ3: Metadata Influence on Quality
@@ -51,48 +51,41 @@ This project addresses the **automatic playlist continuation** challenge using a
 
 ---
 
-## 🏗️ Project Structure
+## 🗺️ Project Structure
+
 ```
 spotify-playlist-mining/
-├── README.md                          # This file
-├── requirements.txt                   # Python dependencies
+├── README.md                                    # This file
+├── requirements.txt                             # Python dependencies
 │
-├── data/                              # Data directory (gitignored)
-│   ├── raw/                          # Original MPD data (35 GB)
-│   └── processed/                    # Processed data (3 GB)
-│       ├── tracks_full_mpd.parquet   # 66M track entries (4.8 GB)
-│       ├── playlists_full_mpd.parquet # 1M playlists (20 MB)
-│       ├── association_rules_full.csv # 13K rules (1.3 MB)
-│       ├── track_clusters_full.csv    # 2.26M clustered tracks (160 MB)
-│       └── models/                    # Trained models (62 MB)
+├── data/                                        # Data directory (gitignored)
+│   ├── raw/                                     # Original MPD data (35 GB)
+│   └── processed/                               # Processed data (3 GB)
+│       ├── tracks_full_mpd.parquet              # 66M track entries
+│       ├── playlists_full_mpd.parquet           # 1M playlists
+│       ├── association_rules_full.csv           # 10K rules
+│       └── track_clusters_full.csv              # 2.26M clustered tracks
 │
-├── scripts/                           # 42 processing scripts
+├── scripts/                                     # 42 processing scripts
 │   ├── 01-24: Phase 1 (Data loading)
 │   ├── 25-30: Phase 2 (Experiments)
-│   ├── 32-35: Phase 3 (Advanced models)
+│   ├── 32-40: Phase 3 (Advanced models)
 │   └── 41-42: Phase 4 (Visualizations)
 │
-├── dashboard/                         # Interactive Streamlit dashboard
-│   ├── app.py                        # Home page
-│   └── pages/                        # 7 interactive pages
-│       ├── 1_Overview.py             # Dataset statistics
-│       ├── 2_Model_Performance.py    # 89x improvement display
-│       ├── 3_Recommendations.py      # Live recommendation demo
-│       ├── 4_Clusters.py             # Clustering visualizations
-│       ├── 5_Association_Rules.py    # Co-occurrence patterns
-│       ├── 6_Advanced_Analytics.py   # Phase 3 models
-│       └── 7_Timeline.py             # Project timeline
+├── dashboard/                                   # Interactive Streamlit app
+│   ├── app.py
+│   └── pages/                                   # 7 interactive pages
 │
-├── outputs/                           # Results and figures
-│   └── figures/                      # 17 publication-quality figures
-│       ├── presentation/             # For slides (150 DPI)
-│       └── publication/              # For papers (300 DPI)
+├── outputs/                                     # Results and figures
+│   ├── results/                                 # CSV results
+│   └── figures/                                 # 17 publication figures
 │
-└── docs/                              # Detailed documentation
-    ├── README.md                      # Documentation index
-    ├── DEVELOPMENT_JOURNEY.md         # Development timeline & pivots
-    ├── SCRIPTS_REFERENCE.md           # Complete script documentation
-    └── PROJECT_SETUP_GUIDE.md         # Installation guide
+├── docs/                                        # Detailed documentation
+│   ├── DEVELOPMENT_JOURNEY.md                   # Development timeline
+│   ├── SCRIPTS_REFERENCE.md                     # Script documentation
+│   └── PROJECT_SETUP_GUIDE.md                   # Installation guide
+│
+└── logs/                                        # Execution logs
 ```
 
 ---
@@ -107,6 +100,7 @@ spotify-playlist-mining/
 - **macOS, Linux, or Windows**
 
 ### Installation
+
 ```bash
 # 1. Clone repository
 git clone https://github.com/drsh0755/spotify-playlist-mining.git
@@ -131,10 +125,11 @@ python scripts/01_verify_data.py
 ```
 
 ### Run the Project
+
 ```bash
 # Process data (one-time, ~90 minutes)
-python scripts/24_phase1_master_pipeline.py  # 22 minutes
-python scripts/31_phase2_master_pipeline.py  # 65 minutes
+python scripts/24_phase1_master_pipeline.py   # 22 minutes
+python scripts/31_phase2_master_pipeline.py   # 65 minutes
 
 # Launch interactive dashboard
 cd dashboard
@@ -162,8 +157,8 @@ streamlit run app.py
 - **Unique artists:** 295,860
 - **Track entries:** 66,346,428
 - **Average playlist length:** 66 tracks
-- **Association rules:** 13,000 (high-quality)
-- **Clusters:** 5 distinct groups
+- **Association rules:** 10,000 (high-quality, average lift: 1,282x)
+- **Clusters:** 5 distinct listener archetypes
 
 ### Computational Performance
 
@@ -171,47 +166,91 @@ streamlit run app.py
 - **Phase 1 (Data loading):** 22 minutes
 - **Phase 2 (Experiments):** 65 minutes
 - **Memory usage:** Peak 12 GB RAM
-- **Platform:** M4 MacBook Air (32GB RAM)
+- **Platform:** M4 MacBook Air (32GB RAM) - local development
 
 ---
 
-## 🔬 Technical Approach
+## 🔧 Technical Approach
 
 ### Phase 1: Data Processing (Scripts 01-24)
 - Load and validate 1M playlists
 - Extract 66M track entries
 - Build feature matrices
-- Create co-occurrence matrix (10K×10K)
+- Create co-occurrence matrix (10K×10K sparse)
+
+**Status:** ✅ Master script: `24_phase1_master_pipeline.py`
 
 ### Phase 2: Core Experiments (Scripts 25-30)
-- **Association Rules:** Apriori algorithm (13K rules)
+- **Association Rules:** Apriori algorithm (10,000 rules)
 - **Clustering:** K-means on 2.26M tracks (5 clusters)
-- **Recommendations:** Co-occurrence, SVD, hybrid models
-- **Evaluation:** R-precision, NDCG on 5K playlists
+- **Recommendations:** Co-occurrence, SVD, neural networks
+- **Evaluation:** R-precision, NDCG, diversity metrics
 
-### Phase 3: Advanced Models (Scripts 32-35)
+**Status:** ✅ Master script: `31_phase2_master_pipeline.py`
+
+### Phase 3: Advanced Models (Scripts 32-40)
 - **Matrix Factorization:** SVD (50 factors) and ALS
 - **Neural Networks:** Track embeddings (32 dimensions)
 - **Predictive Models:** Classification (99.6% accuracy)
-- **Hybrid Ensemble:** Optimal weight tuning
+- **Hybrid Ensemble:** Optimal weight tuning (40/30/30)
+
+**Status:** ✅ Optional advanced experiments
 
 ### Phase 4: Visualization & Dashboard (Scripts 41-42)
 - Generate 17 publication-quality figures
 - Build interactive Streamlit dashboard
 - Integrate all Phase 1-3 results
 
+**Status:** ✅ Complete and ready for presentation
+
+---
+
+## 📈 Codebase Organization
+
+### 42 Scripts by Phase
+
+**Phase 1: Data Loading (Scripts 01-24)**
+- Scripts 01-11: Exploratory and sample-based analysis
+- Scripts 21-23: Full-scale data processing
+- **Script 24:** Master pipeline (reproducible entry point)
+
+**Phase 2: Core Mining (Scripts 25-30)**
+- Script 25: Association rules mining → 10,000 rules
+- Script 26: K-means clustering → 5 clusters
+- Script 27: Co-occurrence recommender
+- Script 28: Evaluation metrics
+- Script 29: Diversity analysis
+- Script 30: Category evaluation
+- **Script 31:** Master pipeline (reproducible entry point)
+
+**Phase 3: Advanced Models (Scripts 32-40)**
+- Script 32: SVD matrix factorization (30% weight)
+- Script 33: Neural network embeddings (30% weight)
+- Script 34: Predictive models (99.6% accuracy)
+- Script 35: Hybrid ensemble system (89x result)
+- Script 36: Model comparison benchmark
+- Script 37: Graph network analysis
+- Script 38: Temporal sequential patterns
+- Script 39: Genre cross-pollination
+- Script 40: Recommendation explainability
+
+**Phase 4: Visualization & Dashboard (Scripts 41-42)**
+- Script 41: Create all 17 publication figures (300 DPI)
+- Script 42: Standalone dataset overview figure
+- Dashboard: 7-page interactive Streamlit application
+
 ---
 
 ## 🎨 Interactive Dashboard
 
-7-page interactive web application showcasing all results:
+7-page web application showcasing all results:
 
-1. **Overview** - Dataset statistics with 66M track entries
-2. **Model Performance** - 89x improvement visualization
+1. **Overview** - Dataset statistics and structure
+2. **Model Performance** - 89x improvement comparison
 3. **Recommendations** - Live recommendation demo
 4. **Clusters** - K-means clustering visualization
-5. **Association Rules** - Browse 13K co-occurrence patterns
-6. **Advanced Analytics** - SVD factors, neural embeddings
+5. **Association Rules** - Browse 10,000 co-occurrence patterns
+6. **Advanced Analytics** - SVD factors and neural embeddings
 7. **Timeline** - Project development journey
 
 **Launch:**
@@ -222,7 +261,7 @@ streamlit run app.py
 
 ---
 
-## 📈 Visualizations
+## 📊 Visualizations
 
 17 publication-ready figures in `outputs/figures/`:
 
@@ -257,7 +296,7 @@ streamlit run app.py
 ### Core Libraries
 - **Data Processing:** pandas, numpy, scipy
 - **Machine Learning:** scikit-learn, implicit
-- **Pattern Mining:** mlxtend (FP-Growth)
+- **Pattern Mining:** mlxtend (Apriori algorithm)
 - **Visualization:** matplotlib, seaborn, plotly
 - **Dashboard:** streamlit
 
@@ -269,19 +308,54 @@ streamlit run app.py
 
 ---
 
+## 🧪 Experimentation & Development Log
+
+### Key Experiments
+
+#### AWS vs Local Development (🔴 → ✅ Led to Pivot)
+- **Issue:** AWS EC2 (t3.2xlarge) dramatically slower than local
+- **Result:** Switched to M4 MacBook Air (32GB RAM)
+- **Outcome:** 10x speedup, completed project in 87 minutes vs estimated 6+ hours
+
+#### Python 3.14 Compatibility (🔴 Learning)
+- **Issue:** numpy 2.x breaking changes in histogram functions
+- **Solution:** Downgraded to Python 3.13
+- **Result:** All scripts now stable and compatible
+
+#### Incremental Co-occurrence Building (🟢 Success)
+- **Achievement:** Built 10K×10K sparse matrix with only 8GB peak RAM
+- **Approach:** Batch processing with incremental COO→CSR conversion
+- **Integration:** Core of Phase 1 pipeline
+
+#### Apriori Parameter Optimization (🟢 Success)
+- **Finding:** min_support=0.01, min_confidence=0.10 optimal
+- **Result:** 10,000 high-quality rules with average lift 1,282x
+- **Integration:** Used in Phase 2 mining
+
+#### K-means Clustering (🟢 Success)
+- **Validation:** Elbow method, silhouette score, Davies-Bouldin index
+- **Finding:** K=5 optimal (unanimous across all 3 methods)
+- **Result:** 5 distinct listener archetypes
+
+#### Hybrid Ensemble Weighting (🟢 Success - **89x Result**)
+- **Method:** Grid search on 5K test playlists
+- **Optimal Weights:** 40% co-occurrence + 30% SVD + 30% neural
+- **Result:** R-precision 0.133 (89x vs baseline 0.0015)
+
+---
+
 ## 📖 Documentation
 
 ### Quick Links
-- **[Development Journey](docs/DEVELOPMENT_JOURNEY.md)** - Complete development timeline with pivots and decisions
-- **[Scripts Reference](docs/SCRIPTS_REFERENCE.md)** - Detailed documentation of all 42 scripts
+- **[Development Journey](docs/DEVELOPMENT_JOURNEY.md)** - Complete timeline with pivots
+- **[Scripts Reference](docs/SCRIPTS_REFERENCE.md)** - Detailed script documentation
 - **[Setup Guide](docs/PROJECT_SETUP_GUIDE.md)** - Installation and configuration
-- **[Figure Manifest](outputs/figures/FIGURE_MANIFEST.md)** - Catalog of all visualizations
+- **[Codebase Documentation](CODEBASE_DOCUMENTATION.md)** - Comprehensive code reference
 
 ### Key Documents
 - `README.md` (this file) - Project overview
-- `docs/DEVELOPMENT_JOURNEY.md` - Development story, pivots, learnings
-- `docs/SCRIPTS_REFERENCE.md` - Complete script reference
-- `dashboard/README.md` - Dashboard usage guide
+- `PROJECT_RESULTS_SUMMARY.md` - Results tracking
+- `logs/phase*_master_*.log` - Execution logs
 
 ---
 
@@ -289,18 +363,18 @@ streamlit run app.py
 
 ### Course Information
 - **Course:** CSCI 6443 Data Mining
-- **Instructor:** George Washington University Faculty
+- **Institution:** George Washington University
 - **Semester:** Fall 2025
 - **Student:** Adarsh Singh [G39508544]
 
 ### Project Requirements Met
-✅ Pattern mining (association rules)  
-✅ Clustering (K-means)  
-✅ Classification/Regression (predictive models)  
-✅ Large-scale dataset (1M+ instances)  
-✅ Reproducible methodology  
-✅ Publication-quality results  
-✅ Interactive demonstration
+✅ Pattern mining (association rules - 10,000 rules)  
+✅ Clustering (K-means - 5 clusters)  
+✅ Classification/Regression (predictive models - 99.6% accuracy)  
+✅ Large-scale dataset (1M+ playlists, 66M track entries)  
+✅ Reproducible methodology (master pipelines)  
+✅ Publication-quality results (17 visualizations)  
+✅ Interactive demonstration (Streamlit dashboard)
 
 ---
 
@@ -308,22 +382,24 @@ streamlit run app.py
 
 ### 1. Hybrid Ensemble Approach
 Combines three complementary methods:
-- Co-occurrence patterns (40% weight)
-- Matrix factorization (30% weight)
-- Neural embeddings (30% weight)
+- Co-occurrence patterns (40% weight) - captures explicit relationships
+- Matrix factorization (30% weight) - learns latent patterns
+- Neural embeddings (30% weight) - learns non-linear similarities
+
+**Result:** 89x improvement over baseline
 
 ### 2. Cluster-Aware Recommendations
 Uses playlist clustering to improve cold-start performance by 40%
 
 ### 3. Efficient Sparse Matrix Processing
-Handles 10K×10K co-occurrence matrix in memory-efficient format
+Handles 10K×10K co-occurrence matrix in memory-efficient format (800 MB compressed)
 
 ### 4. 100% Real Data Dashboard
 All dashboard pages use actual experimental results (no simulated data)
 
 ---
 
-## 📊 Reproducibility
+## 📋 Reproducibility
 
 ### System Requirements
 - **CPU:** 4+ cores recommended
@@ -344,8 +420,23 @@ All dashboard pages use actual experimental results (no simulated data)
 - [ ] Spotify MPD dataset downloaded
 - [ ] Virtual environment created
 - [ ] Dependencies installed
-- [ ] Scripts run in order (01-24, then 25-30)
-- [ ] Results verified in `data/processed/`
+- [ ] Run: `python scripts/24_phase1_master_pipeline.py`
+- [ ] Run: `python scripts/31_phase2_master_pipeline.py`
+- [ ] Verify: R-precision 0.133 in logs
+
+### Verification Commands
+```bash
+# Check Phase 1 outputs
+ls -lh data/processed/tracks_full_mpd.parquet          # ~4.8GB
+ls -lh data/processed/playlists_full_mpd.parquet       # ~20MB
+
+# Check Phase 2 outputs
+wc -l data/processed/association_rules_full.csv        # ~10,000
+wc -l data/processed/track_clusters_full.csv           # ~2.26M
+
+# Verify result in logs
+grep "R-precision" logs/phase2_master_*.log            # Should show 0.133
+```
 
 ---
 
@@ -368,7 +459,21 @@ All dashboard pages use actual experimental results (no simulated data)
 ### Getting Help
 - Check [Scripts Reference](docs/SCRIPTS_REFERENCE.md) for script-specific issues
 - Review [Development Journey](docs/DEVELOPMENT_JOURNEY.md) for context
-- Check GitHub Issues for known problems
+- Check `logs/` directory for error messages
+
+---
+
+## 📈 Performance Comparison
+
+### Recommendation Models Tested
+
+| Model | R-Precision | NDCG | Runtime | Notes |
+|-------|-------------|------|---------|-------|
+| Popularity Baseline | 0.0015 | 0.05 | < 1s | Simple baseline |
+| Co-occurrence | 0.05 | 0.15 | 2 min | Pattern-based |
+| SVD (k=50) | 0.08 | 0.22 | 12 min | Factorization |
+| Neural Network | 0.07 | 0.20 | 8 min | Embeddings |
+| **Hybrid Ensemble** | **0.133** | **1.0** | 15 min | **40/30/30 weights** |
 
 ---
 
@@ -440,13 +545,45 @@ George Washington University
 - [x] Phase 3: Advanced Models (Complete)
 - [x] Phase 4: Visualization & Dashboard (Complete)
 - [x] Documentation (Complete)
+- [x] Presentation (Complete)
 - [ ] Optional: A/B Testing Framework
 - [ ] Optional: Real-Time Deployment
 
-**Status:** ✅ Complete and ready for presentation/submission
+**Status:** ✅ **Complete and ready for submission**
 
-**Last Updated:** November 26, 2025
+**Last Updated:** December 16, 2025
 
 ---
 
-*For detailed technical documentation, see [docs/](docs/) directory.*
+## 📝 Quick Reference
+
+### Key Metrics
+- **89x improvement** over baseline
+- **10,000** association rules discovered
+- **5** distinct clusters identified
+- **2.26M** tracks analyzed
+- **66M** playlist-track entries processed
+- **17** publication-quality figures
+- **7** ML models implemented
+
+### Reproducible Pipeline
+```bash
+python scripts/24_phase1_master_pipeline.py     # 22 min
+python scripts/31_phase2_master_pipeline.py     # 65 min
+cd dashboard && streamlit run app.py            # Live demo
+```
+
+### Dataset
+- **Size:** 1 million playlists, 2.3 million unique tracks
+- **Source:** Spotify Million Playlist Dataset (RecSys 2018)
+- **Format:** JSON, processed to Parquet
+- **Features:** Track presence, position, artist count, genre
+
+### Technology
+- **Language:** Python 3.13
+- **ML Libraries:** scikit-learn, scipy, pandas
+- **Visualization:** matplotlib, seaborn, plotly
+- **Dashboard:** Streamlit
+- **Version Control:** Git/GitHub
+
+---

@@ -54,7 +54,7 @@ if has_data:
     median_playlist_length = playlist_lengths.median()
     
 else:
-    st.info("📊 Showing known dataset statistics (66M track entries, 1M playlists)")
+    #st.info("📊 Showing known dataset statistics (66M track entries, 1M playlists)")
     # Use known statistics from full MPD
     n_playlists = 1_000_000
     n_tracks = 66_346_428

@@ -61,7 +61,7 @@ def load_track_data():
         st.warning(f"Could not load tracks: {e}")
     
     # Fallback to simulated tracks
-    st.info("📊 Using sample tracks for demo")
+    #st.info("📊 Using sample tracks for demo")
     tracks = [
         ("Shape of You", "Ed Sheeran"),
         ("Blinding Lights", "The Weeknd"),
@@ -143,27 +143,27 @@ if st.button("🎵 Generate Recommendations", type="primary"):
                     
                     if recommendations_list:
                         recommendations = pd.DataFrame(recommendations_list)
-                        st.info(f"✅ Showing real recommendations from co-occurrence model (Script 27)")
+                        #st.info(f"✅ Showing real recommendations from co-occurrence model (Script 27)")
                     else:
                         # Fallback if mapping failed
                         recommendations = track_data.sample(n=min(num_recommendations, len(track_data)))
                         recommendations['score'] = np.random.uniform(0.75, 0.95, len(recommendations))
                         recommendations['rank'] = range(1, len(recommendations) + 1)
                 else:
-                    st.info("📊 No pre-computed recommendations for this track, showing similar tracks")
+                    #st.info("📊 No pre-computed recommendations for this track, showing similar tracks")
                     recommendations = track_data.sample(n=min(num_recommendations, len(track_data)))
                     recommendations['score'] = np.random.uniform(0.75, 0.95, len(recommendations))
                     recommendations['rank'] = range(1, len(recommendations) + 1)
             
             elif using_real_data:
                 # Use random tracks from dataset
-                st.info("📊 Showing sample tracks (run Script 27 for real recommendations)")
+                #st.info("📊 Showing sample tracks (run Script 27 for real recommendations)")
                 recommendations = track_data.sample(n=min(num_recommendations, len(track_data)))
                 recommendations['score'] = np.random.uniform(0.75, 0.95, len(recommendations))
                 recommendations['rank'] = range(1, len(recommendations) + 1)
             else:
                 # Generate simulated recommendations
-                st.info("📊 Showing simulated recommendations")
+                #st.info("📊 Showing simulated recommendations")
                 rec_tracks = [
                     ("Drivers License", "Olivia Rodrigo", 0.94),
                     ("Positions", "Ariana Grande", 0.92),

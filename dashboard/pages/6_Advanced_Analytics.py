@@ -41,7 +41,7 @@ def load_phase3_models():
         
         if svd_data is not None and neural_data is not None:
             has_real_data = True
-            st.success(f"✅ Using REAL Phase 3 models! (SVD: {svd_data['track_factors'].shape}, Neural: {neural_data['embeddings'].shape})")
+            #st.success(f"✅ Using REAL Phase 3 models! (SVD: {svd_data['track_factors'].shape}, Neural: {neural_data['embeddings'].shape})")
         else:
             st.info("📊 Using simulated visualizations (Phase 3 models not fully loaded)")
             

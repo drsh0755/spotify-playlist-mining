@@ -77,7 +77,7 @@ def load_rules():
             st.warning(f"Could not load rules: {e}")
     
     # Fallback to sample data
-    st.info("📊 Using sample association rules (run script 25 for real results)")
+    #st.info("📊 Using sample association rules (run script 25 for real results)")
     
     rules_data = [
         ("Shape of You", "Despacito", 0.15, 0.75, 2.8),

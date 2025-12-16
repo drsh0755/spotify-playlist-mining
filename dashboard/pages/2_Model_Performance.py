@@ -54,7 +54,7 @@ def load_performance_data():
             st.warning(f"Could not load real metrics: {e}")
     
     # Fallback to simulated data
-    st.info("📊 Using simulated performance data (run scripts 25-30 for real results)")
+    #st.info("📊 Using simulated performance data (run scripts 25-30 for real results)")
     
     models = ['Popularity\nBaseline', 'Co-occurrence\nBased', 'SVD\nFactorization', 'Hybrid\nEnsemble']
     

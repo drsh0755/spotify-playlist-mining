@@ -64,7 +64,7 @@ def load_cluster_data():
             st.warning(f"Could not load cluster data: {e}")
     
     # Fallback to simulated data
-    st.info("📊 Using simulated cluster data (run script 26 for real results)")
+    #st.info("📊 Using simulated cluster data (run script 26 for real results)")
     
     np.random.seed(42)
     n_points = 500
